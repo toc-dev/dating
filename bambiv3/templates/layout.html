@@ -64,8 +64,13 @@
 }
 .nav a:hover { 
     background:#191917;
-    border:none;
+    border:1px solid #070707;
     border-radius:3px;
+}
+.active{
+  background: #F3EFA1;
+  border: 1px solid #070707;
+  border-radius: 3px;
 }
 
 ul.nav li:first-child a{
@@ -80,10 +85,18 @@ ul.nav li:last-child a {
 
 <nav class="navbar navbar-expand-md navbar-dark sticky-top justify-content-center">
    <ul class="nav">
-    <li><a href="{{url_for('home')}}"><img src="https://image.flaticon.com/icons/svg/3237/3237429.svg" style="width:30px;height:30px;"></a></li>
-    <li><a href="{{url_for('discover')}}"><img src="https://image.flaticon.com/icons/svg/1828/1828884.svg" style="width:30px;height:30px;"></a></li>
-    <li><a href="{{url_for('messages')}}"><img src="https://image.flaticon.com/icons/svg/893/893257.svg" style="width:30px;height:30px;"></a></li>
-    <li><a href="{{url_for('user_posts', username=current_user.username)}}"><img src="https://www.flaticon.com/premium-icon/icons/svg/3133/3133799.svg" style="width:30px;height:30px;"></a></li>
+    <li {% if '/home' == request.path %}  class="active" {% endif %}>
+      <a href="{{url_for('home')}}"><img src="https://image.flaticon.com/icons/svg/3237/3237429.svg" style="width:30px;height:30px;"></a>
+    </li>
+    <li {% if '/discover' == request.path %}  class="active" {% endif %}>
+      <a href="{{url_for('discover')}}"><img src="https://image.flaticon.com/icons/svg/1828/1828884.svg" style="width:30px;height:30px;"></a>
+    </li>
+    <li {% if '/messages' == request.path %}  class="active" {% endif %}>
+      <a href="{{url_for('messages')}}"><img src="https://image.flaticon.com/icons/svg/893/893257.svg" style="width:30px;height:30px;"></a>
+    </li>
+    <li>
+      <a href="{{url_for('user_posts', username=current_user.username)}}"><img src="https://www.flaticon.com/premium-icon/icons/svg/3133/3133799.svg" style="width:30px;height:30px;"></a>
+    </li>
     <!--<li><a href="{{url_for('logout')}}"><img src="https://www.flaticon.com/premium-icon/icons/svg/3009/3009474.svg" style="width:30px;height:30px;"></a></li>-->
 </ul>
 </nav>

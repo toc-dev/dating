@@ -98,26 +98,44 @@ h1 {
         </div>
       </header>
 
-    <div class="menu mb-2" style="background:#191917;border-radius:10px;">
-      <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
-    </div>
+      {% if current_user.is_authenticated %}
+      <!-- notifications and relevant ads -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
+        <h5 style="padding-left: 3px;">My Matches</h5>
+        {% for user in users if user.is_following(current_user) and current_user.is_following(user) %}
+        <header>
+        <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail"></a>
+        <div class="profile-name">
+          <h3>{{user.username}}</h3>
+          {% if user.country and user.country == current_user.country %}
+          <small>From {{user.country}}</small>
+          {% endif %}
+          {% if user.department == current_user.department %}
+          <small>Studies {{user.department}}</small>
+          {% endif %}
+        </div>
+        <div class="follow-btn">
+            {% if not current_user.is_following(user) %}<a class="pt-2 pl-2" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
+          </div>
+      </header>
+      {% endfor %}
+    {% endif %}
+</div>
 
-  {% else %}
-  <header style="color:#F9E9C8;border:2px solid #F9E9C8;padding:8px;">
-    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
-    <div class="profile-name">
-      <h3 class="logo">Hello Friend!</h3>
-      <small>how about signing in?</small>
-    </div>
-  </header>
-  <br>
-     <div class="menu" style="border:1px solid #F9E9C8;border-radius: 5px;">
-      <a class="dropdown-item" href="{{ url_for('new_post') }}"> 🍧 Post</a>
-       <a class="dropdown-item" href="{{ url_for('inbox') }}"> 💬 Inbox</a>
-      <a class="dropdown-item" href="{{ url_for('discover') }}"> 🔥 Discover Friends</a>
-      <a class="dropdown-item" href="{{ url_for('explore') }}"> 🔱 Explore</a>
-      <a class="dropdown-item" href="{{ url_for('blog') }}"> 🎬 Blog</a> 
-      <a class="dropdown-item" href="{{ url_for('about') }}"> 👋 About Bambi</a>
+    <div class="menu mt-2" style="background:#191917;border-radius:10px;">
+      <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
     </div>
   {% endif %}
 </div>
@@ -162,7 +180,7 @@ h1 {
                   <div class="card_image"><img src="{{ url_for('static', filename='resources/' + 'default.jpg') }}" style="width:100%;"></div>
                   <div class="card_content">
                     <h2 class="card_title">Bambi<i class="far fa-check-circle"></i></h2>
-                    <p class="card_text">Wanna see more friend matches for you? <a href="{{url_for('home')}}" target="_blank">Start Swiping!</a></p>
+                    <p class="card_text">Wanna see more friend matches for you? <a href="{{url_for('home')}}">Start Swiping!</a></p>
                   </div>
                 </div>
               </li>
@@ -175,77 +193,7 @@ h1 {
 
 
     <div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
-      {% if current_user.is_authenticated %}
-      <!-- notifications and relevant ads -->
-      {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category , message in messages %}
-              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                {{message}}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-              </div>
-            {% endfor %}
-        {% endif %}
-      {% endwith %}
-      <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
-        <h5 style="padding-left: 3px;">My Matches</h5>
-        {% for user in users if user.is_following(current_user) and current_user.is_following(user) %}
-        <header>
-        <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail"></a>
-        <div class="profile-name">
-          <h3>{{user.username}}</h3>
-          {% if user.country and user.country == current_user.country %}
-          <small>From {{user.country}}</small>
-          {% endif %}
-          {% if user.department == current_user.department %}
-          <small>Studies {{user.department}}</small>
-          {% endif %}
-        </div>
-        <div class="follow-btn">
-            {% if not current_user.is_following(user) %}<a class="pt-2 pl-2" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
-          </div>
-      </header>
-      {% endfor %}
-      </div>
-      <br>
-      <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo">
-      <div class="card-body">
-        <h5 class="card-title"><i class="fas fa-ad"></i></h5>
-        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted logo">BAMBI</small>
-      </div>
     </div>
-    {% else %}
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <a href="{{ url_for('home') }}"  style="color:#000;text-decoration: none">
-      <strong>🔥 Swipe Friends!</strong> Swipe left and right to make friends.</a>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-      <strong>💬 Check your Inbox! </strong>You could be having Unread Messages
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <div class="card" style="color:#000;">
-      <img class="card-img-top" src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo">
-      <div class="card-body">
-        <h5 class="card-title"><i class="fas fa-ad"></i></h5>
-        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted logo">BAMBI</small>
-      </div>
-    </div>
-    {% endif %}
-</div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

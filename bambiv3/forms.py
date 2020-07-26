@@ -30,12 +30,12 @@ class LoginForm(FlaskForm):
 
 class UpdateAccountForm(FlaskForm):
 	username = StringField('Username', validators = [DataRequired(), Length(min=2, max=20), Regexp(r'^[\w.-_.]+$')])
-	email = StringField('Email', validators = [Email()])
+	email = StringField('Email', validators = [Email(), DataRequired()])
 	picture = FileField('Pic 1', validators=[FileAllowed(['jpg', 'jpeg' , 'png'])])
 	picture2 = FileField('Pic 2', validators=[FileAllowed(['jpg', 'jpeg' , 'png'])])
 	picture3 = FileField('Pic 3', validators=[FileAllowed(['jpg', 'jpeg' , 'png'])])
 	department = StringField('Department', validators=[DataRequired()])
-	student_number = StringField('Student Number', validators=[])
+	student_number = StringField('Student Number', validators=[DataRequired()])
 	country = StringField('Country', validators=[DataRequired()])
 	age = DateField('birthday', format='%d-%m-%Y', validators=[DataRequired()])
 	snapchat = StringField('Snapchat')

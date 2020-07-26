@@ -5,6 +5,12 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-3 d-none d-lg-block position-fixed">
+      <header class="mb-2">
+        <img src="{{ url_for('static', filename='profile_pics/' + current_user.dp) }}" alt="default profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>{{current_user.username}}</h3>
+        </div>
+      </header>
       <!-- notifications and relevant ads -->
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -38,6 +44,9 @@
       </header>
       {% endfor %}
       </div>
+       <div class="menu mt-2" style="background:#191917;border-radius:10px">
+        <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
+        </div>
 </div>
 
 
@@ -100,29 +109,7 @@
 
 
     <div class="col-lg-3 d-none d-lg-block position-fixed offset-sm-9">
-      <!-- User info , photos -->
-      {% if current_user.is_authenticated %}
-      <header class="mb-2">
-        <img src="{{ url_for('static', filename='profile_pics/' + current_user.dp) }}" alt="default profile" class="profile-thumbnail">
-        <div class="profile-name">
-          <h3>{{current_user.username}}</h3>
-        </div>
-      </header>
-
-
-    <div class="menu mb-2" style="background:#191917;border-radius:10px">
-      <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
-    </div>
-
-  {% else %}
-  <header>
-    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
-    <div class="profile-name">
-      <h3 class="logo">Hello Friend!</h3>
-      <small>how about signing in?</small>
-    </div>
-  </header>
-  {% endif %}
+      
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
