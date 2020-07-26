@@ -267,7 +267,7 @@ section .btn {
 
 
         <ul>
-          <li style="font-size:22px;"><span class="profile-stat-count">10</span> <small>likes</small></li>
+          <li style="font-size:22px;"><span class="profile-stat-count">3</span> <small>matches</small></li>
           <li style="font-size: 22px;" data-toggle="modal" data-target="#followers"><span class="profile-stat-count">{{ user.followers.count() }}</span> <small>followers</small></li>
           <li style="font-size: 22px;" data-toggle="modal" data-target="#following"><span class="profile-stat-count">{{ user.followed.count() }}</span> <small>following</small></li>
         </ul>
@@ -278,7 +278,7 @@ section .btn {
 
         <p class="mb-2" style="font-size:18px;"><small class="profile-real-name" style="font-size:18px;font-weight:400">
           {% if user.username == "harun" %}
-          <code>{{user.email.split("@")[0] | lower}}</code>☁</small> - <code style="color:#fff;">making obnoxious life decisions since '00.</code>
+          <code>{% if user.email %} {{user.email.split("@")[0] | lower}} {% endif %}</code>☁</small> - <code style="color:#fff;">making obnoxious life decisions since '00.</code>
           <br>
           <code>
             <a class="badge badge-warning" style="color:#000;">💦Founder, Bambi</a> 
@@ -291,9 +291,9 @@ section .btn {
 
           {%else%}
             {% if user.bio %}
-            <code>{{user.email.split("@")[0] | lower}}</code></small> - <code style="color:#fff;">{{user.bio | safe}}</code></p>
+            <code>{% if user.email %} {{user.email.split("@")[0] | lower}} {% endif %}</code></small> - <code style="color:#fff;">{{user.bio | safe}}</code></p>
             {% else %}
-          <code>{{user.email.split("@")[0] | lower}}</code></small> - <code style="color:#fff;">hey there, lets be friends 🤗</code>
+          <code>{% if user.email %} {{user.email.split("@")[0] | lower}} {% endif %}</code></small> - <code style="color:#fff;">hey there, lets be friends 🤗</code>
             {%endif%}
           {%endif%}
 
@@ -338,8 +338,8 @@ section .btn {
       <p> {% if user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{user.gender.title()}}</span></p>
       {% if user.country %}
       <p> 🌍 From <a href="https://www.google.com/maps?q={{user.country.title()}}" target="_blank">
-      {% endif %}
       {{user.country.title()}}</a></p>
+      {% endif %}
       <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
       <p> 💪 Joined <span>{{ moment(user.date_joined).fromNow() }}</span></p>
       {% if current_user.is_authenticated and current_user.is_following(user) %}

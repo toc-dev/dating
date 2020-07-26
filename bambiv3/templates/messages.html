@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3 d-none d-lg-block position-fixed">
+      <!-- notifications and relevant ads -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:400px;">
+        <h5 style="padding-left: 3px;">Recent Chats</h5>
+        {% for person in recent_chats %}
+        <header>
+        <a href="{{url_for('message', recipient=person.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + person.dp) }}" alt="default profile" class="profile-thumbnail"></a>
+        <div class="profile-name">
+          <h3>{{person.username}}</h3>
+          {% if person.country == current_user.country %}
+          <small>From {{person.country}}</small>
+          {% endif %}
+          {% if person.department == current_user.department %}
+          <small>Studies {{person.department}}</small>
+          {% endif %}
+        </div>
+        <div class="follow-btn">
+            {% if person != current_user and not current_user.is_following(person) %}<a href="{{ url_for('follow', username=person.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
+          </div>
+      </header>
+      {% endfor %}
+      </div>
+</div>
+
+
+
+    <div class="col-lg-6 offset-lg-3">
+     
+      {% if current_user.is_authenticated %}
+          <section class="cardi scroll mb-2">
+            {% for user in users if user != current_user %}
+            <div class="others">
+            <div class="card--content"><a href="{{ url_for('message',recipient=user.username) }}"><img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt=""></a>
+            </div>
+            <small style="font-size:15px;color:#f8f8f2;padding-left:15px">
+            <code style="color:#fff;">{{user.username.lower()}}</code>
+            {% if user.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:15px;height:15px;">{% endif %}
+          </small>
+            </div>
+            {% endfor %}
+            <div class="card--content"></div>
+            <div class="card--content"></div>
+            <div class="card--content"></div>
+          </section>
+          {% endif %}
+
+
+
+
+
+   {% for message in messages %}
+    <div class="post mb-2">
+      <header style="padding:0;">
+          <img src="{{ url_for('static', filename='profile_pics/' + message.author.dp) }}" alt="profile pic" class="profile-thumbnail">
+          <div class="profile-name">
+            <h3 data-toggle="popover"><a href="{{url_for('user_posts', username=message.author.username)}}" style="color:#fff;">{{message.author.username}}
+             {% if message.author.username in ["harun" , "bambi"] %}<img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">{% endif %}
+           </a></h3>
+            <small>active {{ moment(message.author.last_seen).fromNow() }}</small>
+          </div>
+          <div class="follow-btn">
+            <small><a href="{{ url_for('message',recipient=message.author.username) }}" style="text-decoration:none;">reply</a></small>
+          </div>
+        </header>
+
+        <div id="inner">
+
+          <p><a href="{{ url_for('message',recipient=message.author.username) }}" style="color:#fff;text-decoration:none;">{{message.body | safe | urlize(40, target='_blank')}}</a></p>
+
+        </div>
+
+        <footer>
+            <div class="Retweets">
+               <small class="date">{{ moment(message.timestamp).fromNow() }}</small>
+            </div>
+        </footer>
+    </div>
+  {% endfor %}
+  <div style="margin-bottom: 60px;"></div>
+</div>
+
+
+
+    <div class="col-lg-3 d-none d-lg-block position-fixed offset-sm-9">
+      <!-- User info , photos -->
+      {% if current_user.is_authenticated %}
+      <header class="mb-2">
+        <img src="{{ url_for('static', filename='profile_pics/' + current_user.dp) }}" alt="default profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>{{current_user.username}}</h3>
+        </div>
+      </header>
+
+
+    <div class="menu mb-2" style="background:#191917;border-radius:10px">
+      <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
+    </div>
+
+  {% else %}
+  <header>
+    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+    <div class="profile-name">
+      <h3 class="logo">Hello Friend!</h3>
+      <small>how about signing in?</small>
+    </div>
+  </header>
+  {% endif %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script>
+     $('.love').click(function(){
+      $(this).toggleClass('liked');
+    });
+  </script>
+
+  <script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover({
+    trigger: 'hover'
+  }); 
+});
+</script>
+
+<script id="dsq-count-scr" src="//baambi.disqus.com/count.js" async></script>
+
+{% endblock content %}

@@ -38,10 +38,54 @@
     {% endif %}
     
   </head>
+  <style>
+    ul.nav {
+    width:80%;
+    margin:0 auto;
+    padding:0;
+    list-style:none;
+    background-color:none;
+    text-align:center;
+    font-family: sans-serif; 
+}
+.nav li { 
+    display:inline-block;
+    width:25%;
+    margin:0;
+    padding:0;
+}
+.nav a {
+    text-align:center;
+    padding:8px 0 8px 0;
+    margin:0;
+    display:block;
+    text-decoration:none;
+    color: #fff;
+}
+.nav a:hover { 
+    background:#191917;
+    border:none;
+    border-radius:3px;
+}
+
+ul.nav li:first-child a{
+    border:none;
+}
+ul.nav li:last-child a {
+    border:none;
+}
+  </style>
   <body>
 
-<nav class="navbar navbar-expand-md navbar-dark sticky-top">
-   
+
+<nav class="navbar navbar-expand-md navbar-dark sticky-top justify-content-center">
+   <ul class="nav">
+    <li><a href="{{url_for('home')}}"><img src="https://image.flaticon.com/icons/svg/3237/3237429.svg" style="width:30px;height:30px;"></a></li>
+    <li><a href="{{url_for('discover')}}"><img src="https://image.flaticon.com/icons/svg/1828/1828884.svg" style="width:30px;height:30px;"></a></li>
+    <li><a href="{{url_for('messages')}}"><img src="https://image.flaticon.com/icons/svg/893/893257.svg" style="width:30px;height:30px;"></a></li>
+    <li><a href="{{url_for('user_posts', username=current_user.username)}}"><img src="https://www.flaticon.com/premium-icon/icons/svg/3133/3133799.svg" style="width:30px;height:30px;"></a></li>
+    <!--<li><a href="{{url_for('logout')}}"><img src="https://www.flaticon.com/premium-icon/icons/svg/3009/3009474.svg" style="width:30px;height:30px;"></a></li>-->
+</ul>
 </nav>
 
 

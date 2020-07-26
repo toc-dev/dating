@@ -34,8 +34,8 @@ class User(db.Model, UserMixin):
 	country = db.Column(db.String(20), nullable=True)
 	bio = db.Column(db.String(120), nullable=True)
 	private = db.Column(db.Boolean, default=False, nullable=False)
-	snapchat = db.Column(db.String(20), unique=True, nullable=True)
-	instagram = db.Column(db.String(20), unique=True, nullable=True)
+	snapchat = db.Column(db.String(20), default=False, nullable=True)
+	instagram = db.Column(db.String(20), default=False, nullable=True)
 	followed = db.relationship(
 		'User', secondary=followers,
 		primaryjoin=(followers.c.follower_id == id),

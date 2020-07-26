@@ -24,10 +24,23 @@ def home():
 	if current_user.is_authenticated:
 		hour = datetime.now().hour
 		greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
-		return render_template('36.html', title="Home", greeting=greeting)
+		users = User.query.all()
+		return render_template('swipe.html', title="Home", greeting=greeting, users=users)
 	else:
 		return redirect(url_for('login'))
 
+@app.route('/messages')
+@login_required
+def messages():
+	current_user.last_message_read_time = datetime.utcnow()
+	db.session.commit()
+	messages = current_user.messages_received.order_by(m.timestamp.desc())
+	recent_chats = list()
+	for message in messages:
+		recent_chats.append(message.author)
+	recent_chats = list(dict.fromkeys(recent_chats))
+	users = User.query.all()
+	return render_template('messages.html', messages=messages, users=users, recent_chats=recent_chats)
 
 @app.route('/m/<recipient>', methods=['GET', 'POST'])
 @login_required
@@ -65,11 +78,6 @@ def message(recipient):
 def discover():
 	users = User.query.all()
 	return render_template('discover.html', users=users, title='Discover')
-
-@app.route('/swipe')
-def swipe():
-	users = User.query.all()
-	return render_template('swipe.html', users=users)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -190,6 +198,11 @@ def user_posts(username):
 		dp = url_for('static', filename='profile_pics/' + current_user.dp)
 		user = User.query.filter_by(username=username).first_or_404()
 		users = User.query.all()
+		mutual = []
+		for person in user.followers:
+			if person in user.followed:
+				mutual.append(person)
+				mutual_count = len(mutual)
 		return render_template('user_posts.html', user=user, users=users, title=user.username.title(),dp=dp, form=form)
 	user = User.query.filter_by(username=username).first_or_404()
 	return render_template('user_posts.html', user=user, title=user.username.title())
