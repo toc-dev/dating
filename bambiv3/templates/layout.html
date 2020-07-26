@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Language" content="en-au">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Bambi is a fun place for Near East University students to manage their lives and make friends while at it. Join Today!" />
+    <meta property="og:description" content="Bambi is a fun place for Near East University students to manage their lives and make friends while at it. Join today!" />
+    <meta property="og:image" href="{{ url_for('static', filename='resources/' + 'default.jpg') }}" />
+    <link rel="canonical" href="http://bambi.app/">
+    <meta property="og:title" content="Bambi - A Social Network for Near East University by Harun Mohamed">
+    <meta property="og:description" content="Bambi is a fun place for Near East University students to manage their lives and make friends while at it.">
+    <meta property="og:url" content="http://bambi.app/">
+    <meta property="og:site_name" content="Bambi">
+    <meta property="og:image" content="{{ url_for('static', filename='resources/' + 'default.jpg') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Bambi is a fun place for Near East University students to manage their lives and make friends while at it.">
+    <meta name="twitter:title" content="Bambi - A Social Network for Near East University by Harun Mohamed">
+    <meta name="twitter:domain" content="Bambi">
+    <meta name="twitter:creator" content="@harunnmohamed">
+    <meta name="twitter:image:src" content="{{ url_for('static', filename='resources/' + 'default.jpg') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- CSS styles in static -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <!-- Font awesome kit -->
+    <script src="https://kit.fontawesome.com/17192b7610.js"></script>
+
+
+
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='resources/' + 'logo.svg') }}">
+    {% if title %}
+      <title>Bambi - {{ title }}</title>
+    {% else %}
+      <title>Bambi</title>
+    {% endif %}
+    
+  </head>
+  <body>
+
+<nav class="navbar navbar-expand-md navbar-dark sticky-top">
+   
+</nav>
+
+
+
+  
+
+  {% block content %} {% endblock %}
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script>
+  $(document).ready(function(){
+    $('[data-toggle="popover"]').popover({
+      trigger: 'hover'
+    }); 
+  });
+</script>
+
+<script>
+  //get id Year and add current year using JS
+    document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>
+
+{% block scripts %}
+    {{ moment.include_moment() }}
+
+    <script>
+        // ...
+        function set_message_count(n) {
+            $('#message_count').text(n);
+            $('#message_count').css('visibility', n ? 'visible' : 'hidden');
+        }
+    </script>
+
+{% endblock %}
+
+  </body>
+</html>

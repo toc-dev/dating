@@ -1,0 +1,263 @@
+{% extends "layout.html" %}
+{% block content %}
+	
+
+<div class="container-fluid">
+	<div class="row">
+
+
+		<div class="col-lg-3 d-none d-lg-block position-fixed">
+			<header class="mb-2">
+		        <img src="{{ dp }}" alt="user profile" class="profile-thumbnail">
+		        <div class="profile-name">
+		          <h3>{{current_user.username}}</h3>
+		        </div>
+		      </header>
+		      
+		    <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
+		    <div class="card-body">
+		      <!--<h5 class="card-title">About</h5>-->
+		       <!--<p> 🎓 Studies at <span>Near East University</span></p>-->
+		      <p> 🏅 Majors in <span>{{current_user.department}}</span></p>
+		      {% if current_user.student_number %}
+		      <p> ☂ Student Number: <span>{{current_user.student_number}}</span></p>
+		      {% endif %}
+		      <p> 🙊 Born <span>{{ moment(current_user.age).fromNow() }}</span></p>
+		      <p> {% if current_user.gender == 'male' %} 👨 {% else %}👩 {% endif %} Gender: <span>{{current_user.gender.title()}}</span></p>
+		      {% if current_user.country %}
+		      <p> 🌍 From <a href="https://www.google.com/maps?q={{current_user.country.title()}}" target="_blank">{{current_user.country.title()}}</a></p>
+		      {% endif %}
+		      <p> 💪 Joined <span>{{ moment(current_user.date_joined).fromNow() }}</span></p>
+		      <small>⏰ Last seen on: {{ moment(current_user.last_seen).format('LLL') }}</small>
+		    </div>
+		  </div>
+
+
+		  <header>
+		    <img src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo" class="profile-thumbnail">
+		    <div class="profile-name">
+		      <h3 class="logo">BAMBI</h3>
+		      <small id="year"></small>
+		    </div>
+		  </header>
+		</div>
+
+
+		<div class="col-lg-6 offset-lg-3" style="text-align: center">
+			
+			<div class="post">
+				 {% with messages = get_flashed_messages(with_categories=true) %}
+		    	{% if messages %}
+		      		{% for category , message in messages %}
+		        		<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+	      					{{message}}
+	        			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	          				<span aria-hidden="true">&times;</span>
+	        			</button>
+	      				</div>
+		      		{% endfor %}
+		    	{% endif %}
+	  		  {% endwith %}
+			  <div id="inner">
+			   <div class="content-section">
+				  <form method="POST" action="" enctype="multipart/form-data">
+				    {{ form.hidden_tag() }}
+				    <fieldset class="form-group">
+				      <legend class="border-bottom mb-2 pb-2">Account Info</legend>
+				      <div class="row">
+				      	<div class="col">
+					      <div class="form-group">
+					        {{ form.picture.label() }}
+					        {{ form.picture(class="form-control-file") }}
+					        {% if form.picture.errors %}
+					          {% for error in form.picture.errors %}
+					          	<span class="text-danger">{{ error }}</span><br>
+					          {% endfor %}
+					        {% endif %}
+					      </div>
+					     </div>
+					   <div class="col">
+					      <div class="form-group">
+					        {{ form.picture2.label() }}
+					        {{ form.picture2(class="form-control-file") }}
+					        {% if form.picture2.errors %}
+					          {% for error in form.picture2.errors %}
+					          	<span class="text-danger">{{ error }}</span><br>
+					          {% endfor %}
+					        {% endif %}
+					      </div>
+					  </div>
+					  	<div class="col">
+					      <div class="form-group">
+					        {{ form.picture3.label() }}
+					        {{ form.picture3(class="form-control-file") }}
+					        {% if form.picture3.errors %}
+					          {% for error in form.picture3.errors %}
+					          	<span class="text-danger">{{ error }}</span><br>
+					          {% endfor %}
+					        {% endif %}
+					      </div>
+					  </div>
+					    </div>
+				      <div class="form-group">
+				        {{ form.username.label(class="form-control-label") }}
+				        {% if form.username.errors %}
+				        {{ form.username(class="form-control form-control-lg is-invalid") }}
+				        <div class="invalid-feedback">
+				          {% for error in form.username.errors %}
+				          <span>{{ error }}</span>
+				          {% endfor %}
+				        </div>
+				        {% else %}
+				        {{ form.username(class="form-control form-control-lg") }}
+				        {% endif %}
+				      </div>
+				      <div class="form-group">
+		                {{ form.bio.label(class="form-control-label") }}
+		                {% if form.bio.errors %}
+		                {{ form.bio(class="form-control form-control-lg is-invalid") }}
+		                <div class="invalid-feedback">
+		                  {% for error in form.bio.errors %}
+		                  <span>{{ error }}</span>
+		                  {% endfor %}
+		                </div>
+		                {% else %}
+		                {{ form.bio(class="form-control form-control-lg") }}
+		                {% endif %}
+		              </div>
+		               <div class="form-group">
+		                <div class="row">
+		                  <div class="col">
+		                    {{ form.snapchat.label(class="form-control-label") }}
+		                    {% if form.snapchat.errors %}
+		                    {{ form.snapchat(class="form-control form-control-lg is-invalid") }}
+		                    <div class="invalid-feedback">
+		                      {% for error in form.snapchat.errors %}
+		                      <span>{{ error }}</span>
+		                      {% endfor %}
+		                    </div>
+		                    {% else %}
+		                    {{ form.snapchat(class="form-control form-control-lg") }}
+		                    {% endif %}
+		                  </div>
+		                  <div class="col">
+		                    {{ form.instagram.label(class="form-control-label") }}
+		                    {% if form.instagram.errors %}
+		                    {{ form.instagram(class="form-control form-control-lg is-invalid") }}
+		                    <div class="invalid-feedback">
+		                      {% for error in form.instagram.errors %}
+		                      <span>{{ error }}</span>
+		                      {% endfor %}
+		                    </div>
+		                    {% else %}
+		                    {{ form.instagram(class="form-control form-control-lg") }}
+		                    {% endif %}
+		                  </div>
+		                </div>
+		              </div>
+				      <div class="form-group">
+				        {{ form.email.label(class="form-control-label") }}
+				        {% if form.email.errors %}
+				        {{ form.email(class="form-control form-control-lg is-invalid") }}
+				        <div class="invalid-feedback">
+				          {% for error in form.email.errors %}
+				          <span>{{ error }}</span>
+				          {% endfor %}
+				        </div>
+				        {% else %}
+				        {{ form.email(class="form-control form-control-lg") }}
+				        {% endif %}
+				      </div>
+				      <div class="form-group">
+				        {{ form.department.label(class="form-control-label") }}
+				        {% if form.department.errors %}
+				        {{ form.department(class="form-control form-control-lg is-invalid") }}
+				        <div class="invalid-feedback">
+				          {% for error in form.department.errors %}
+				          <span>{{ error }}</span>
+				          {% endfor %}
+				        </div>
+				        {% else %}
+				        {{ form.department(class="form-control form-control-lg") }}
+				        {% endif %}
+				      </div>
+				      <div class="form-group">
+				        {{ form.student_number.label(class="form-control-label") }}
+				        {% if form.student_number.errors %}
+				        {{ form.student_number(class="form-control form-control-lg is-invalid") }}
+				        <div class="invalid-feedback">
+				          {% for error in form.student_number.errors %}
+				          <span>{{ error }}</span>
+				          {% endfor %}
+				        </div>
+				        {% else %}
+				        {{ form.student_number(class="form-control form-control-lg") }}
+				        {% endif %}
+				      </div>
+				      <div class="form-group">
+				        {{ form.country.label(class="form-control-label") }}
+				        {% if form.country.errors %}
+				        {{ form.country(class="form-control form-control-lg is-invalid") }}
+				        <div class="invalid-feedback">
+				          {% for error in form.country.errors %}
+				          <span>{{ error }}</span>
+				          {% endfor %}
+				        </div>
+				        {% else %}
+				        {{ form.country(class="form-control form-control-lg") }}
+				        {% endif %}
+				      </div>
+				       <div class="form-group">
+				        {{ form.age.label(class="form-control-label") }}
+				        {% if form.age.errors %}
+				        {{ form.age(class="form-control form-control-lg is-invalid") }}
+				        <div class="invalid-feedback">
+				          {% for error in form.age.errors %}
+				          <span>{{ error }}</span>
+				          {% endfor %}
+				        </div>
+				        {% else %}
+				        {{ form.age(class="form-control form-control-lg") }}
+				        {% endif %}
+				      </div>
+				    </fieldset>
+				    <div class="form-group">
+				      {{ form.submit(class="btn btn-outline-warning") }}
+				    </div>
+				  </form>
+
+			  </div>
+		</div>
+			</div>
+
+		</div>
+
+
+
+		<div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
+			 <header data-toggle="modal" data-target="#profile"><a style="text-decoration:none;" href="{{url_for('user_posts', username=current_user.username)}}">
+		        <div class="profile-name">
+		          <h3 style="color:#fff;">My Profile</h3>
+		          <small>click to view all your posts</small>
+		        </div>
+		        </a>
+		      </header>
+		      <br>
+			<div class="card" style="color:#000;">
+		      <img class="card-img-top" src="{{ url_for('static', filename='resources/' + 'logod.png') }}" alt="logo">
+		      <div class="card-body">
+		        <h5 class="card-title"><small class="text-muted">sponsored</small></h5>
+		        <p class="card-text">Tell your friends to sign up to Bambi. We wont offer you any freebies but its worth the while</p>
+		      </div>
+		      <div class="card-footer">
+		        <small class="text-muted">Last updated 3 mins ago</small>
+		      </div>
+		    </div>
+		</div>
+
+
+	</div>
+</div>
+
+
+{% endblock content %}

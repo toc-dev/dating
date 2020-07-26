@@ -1,0 +1,170 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3 d-none d-lg-block position-fixed">
+     
+       <h1>
+
+        Recent Chats
+         {% set new_messages = current_user.new_messages() %}<span id="message_count" class="badge badge-warning"style="visibility: {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span></a>
+
+      </h1>
+
+      <div style="overflow:auto;height:500px;padding-right:5px;">
+      {% for person in recent_chats %}
+      <a href="{{ url_for('message',recipient=person.username) }}" style="text-decoration:none;">
+      <header class="mb-2">
+        <img src="{{ url_for('static', filename='profile_pics/' + person.dp) }}" alt="default profile" class="profile-thumbnail">
+        <div class="profile-name">
+          <h3>{{person.username}}</h3>
+          <!--{% for message in received_all if person == message.author %}
+          <small title="">{{ message.body | truncate(45) }}</small>
+          {% endfor %}-->
+          <small class="text-muted">active {{ moment(person.last_seen).fromNow() }}</small>
+        </div>
+      </header>
+      </a>
+      {% endfor %}
+    </div>
+
+</div>
+
+
+
+    <div class="col-lg-7 offset-lg-3"> 
+      
+      <h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{user.username.title()}}
+             {% if recipient in ["harun" , "bambi"] %}
+             <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">
+             {% endif %}
+           </a></h3>
+
+           <div style="overflow:auto;height:460px;padding:5px;">
+
+
+      {% for message in messages %}
+          <p class="mb-2" 
+          style="
+          {% if message.author == current_user%}
+            text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#191917;
+          {%else%}
+            text-align:left;padding:5px;border-radius:10px;display:inline-block;max-width:75%;border:2px solid #191917;
+          {% endif %}">
+
+          {% if message.author != current_user %}
+          <img src="{{ url_for('static', filename='profile_pics/' + message.author.dp) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:30px;height:30px;border-radius:50%">
+          {% endif %} 
+
+          {{message.body | safe | urlize(40, target='_blank')}} 
+
+          <br>
+          <small style="display:inline-block;float:right;">{{ moment(message.timestamp).fromNow() }}</small>
+        </p>
+        <br>
+
+        {% else %}
+            <!-- if chat has no messages -->
+            <p class="mb-2" style="text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#191917;">
+
+            <img src="{{ url_for('static', filename='profile_pics/' + current_user.dp) }}" alt="profile pic"style="width:35px;height:35px;border-radius:50%">
+
+            Hey {{current_user.username.title()}}, {{user.username.title()}}'s birthday is {{user.age.strftime(' %b %d ')}}. How is that for a start? 😉🍻
+
+            </p>
+
+            <p class="mb-2" style="text-align:left;padding:5px;border-radius:10px;display:inline-block;float:right;clear:both;max-width:75%;background:#191917;">
+              {% if current_user.single and user.single and current_user.gender != user.gender %}
+                what if I also told you {{user.username.title()}} is single & searchin? 💑😇❤
+              {% endif %}
+            </p>
+
+        {% endfor %}
+
+        <div id="chat_bottom"></div>
+
+        </div>
+
+      <div class="post" style="background:none;padding:2px;">
+        <div id="inner">
+         <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+              <!--<legend class="border-bottom mb-2 pb-2">Message {{recipient.title()}}</legend>-->
+            <div class="input-group mt-2">
+              {{ form.message.label(placeholder="message...", class="form-control-label") }}
+                  {% if form.message.errors %}
+                    {{ form.message(placeholder="message...", class="form-control form-control-sm is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.message.errors %}
+                          <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.message(placeholder="type message...", class="form-control form-control-sm subtle", rows="2", style="border:2px solid #191917;height:45px;border-radius:5px 0px;") }}
+                  {% endif %}
+
+              <div class="input-group-append">
+                {{ form.submit(class="btn", style="margin-top:2px;border:2px solid #191917;") }}
+              </div>
+            </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+
+
+    <!--<div class="col-lg-3 d-none d-lg-block position-fixed offset-sm-9">
+       notifications and relevant ads 
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+      
+</div>-->
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script>
+     $('.love').click(function(){
+      $(this).toggleClass('liked');
+    });
+  </script>
+
+  <!--<script>
+    // reload page every 5 seconds
+    setTimeout(function(){
+      window.location.reload(1);
+    }, 30000);
+  </script>-->
+
+  <script>
+    // go to bottom of chat on load.
+    window.onload = function(){
+      document.getElementById('chat_bottom').scrollIntoView();
+  };
+  </script>
+
+  <script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover({
+    trigger: 'hover'
+  }); 
+});
+</script>
+
+<script id="dsq-count-scr" src="//baambi.disqus.com/count.js" async></script>
+
+{% endblock content %}
