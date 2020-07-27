@@ -27,7 +27,7 @@ def home():
 		users = User.query.all()
 		return render_template('swipe.html', title="Home", greeting=greeting, users=users)
 	else:
-		return redirect(url_for('login'))
+		return render_template('intro.html', title="Intro")
 
 @app.route('/messages')
 @login_required
@@ -102,6 +102,7 @@ def register():
 		return redirect(url_for('login'))
 	return render_template('register.html', title="Register", form=form)
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated:
@@ -121,7 +122,7 @@ def login():
 @app.route('/logout')
 def logout():
 	logout_user()
-	return redirect(url_for('login'))
+	return render_template('intro.html', title="Intro")
 
 
 @app.route('/account', methods=['GET', 'POST'])
