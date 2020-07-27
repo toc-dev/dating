@@ -3,15 +3,15 @@
 <br />
 <p align="center">
   <a href="https://github.com/harunmohamed/bambi-v3">
-    <img src="https://www.bambi.app/static/resources/logo.svg" alt="Logo" width="80" height="80">
+    <img src="https://image.flaticon.com/icons/svg/2990/2990525.svg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Bambi</h3>
+  <h3 align="center">Bambi Dating</h3>
 
   <p align="center">
-    Discover and Make Friends on Bambi!
+    Match, Chat and Date on Bambi!
     <br />
-    <a href="https://bambi.app">View App</a>
+    <a href="https://neudating.herokuapp.com">View App</a>
     ·
     <a href="https://bambi.app/m/harun">Report Bug</a>
     ·
@@ -55,18 +55,14 @@
 
 [![Bambi Screenshot][product-screenshot]](https://bambi.app)
 
-Welcome to the official Bambi Repository. On this version of Bambi, the user can do the following:
+Welcome to the official Bambi Dating Repository. On this version of Bambi, the user can do the following:
 
-* Sign up, Log in, reset their passwords using their emails
-* Post stuff on their timelines and like people's posts
-* Follow friends, view their posts only on Friends Posts and what they like too.
-* Message Friends and see when they were last online.
-* Post item listings on Market
-* Buy stuff from market
-* Explore random stuff on Explore
-* Get started on Bambi Dating
+* Match with users
+* See who likes you
+* Message your matches 
+* View and Modify your profile
 
-Bambi is in active production and more features are in the pipeline.
+Bambi Dating is in active production and more features are in the pipeline.
 
 ### Built With
 * [Python](https://python.org)
@@ -95,7 +91,7 @@ install python on your computer
 
 Clone the repo
 ```sh
-git clone https://github.com/harunmohamed/bambi-v3
+git clone https://github.com/harunmohamed/dating
 ```
 
 Open project directory, create a virtual environment and install all requirements
@@ -112,7 +108,7 @@ python run.py
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Bambi can be used as a social network to share stuff, make friends, chat and see what your friends like and buy & sell stuff from each other
+Bambi Dating is a campus social network for find friends with similar interests and hit it off
 
 _For more examples, please refer to the [Documentation](https://bambi.app)_
 
@@ -121,7 +117,7 @@ _For more examples, please refer to the [Documentation](https://bambi.app)_
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/harunmohamed/bambi-v3/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/harunmohamed/dating/issues) for a list of proposed features (and known issues).
 
 
 
@@ -150,7 +146,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - [@harunnmohamed](https://twitter.com/harunnmohamed) - harunmohamed901@gmail.com
 
-Project Link: [Bambi Official Webapp](https://bambi.app)
+Project Link: [Bambi Dating Official Webapp](https://neudating.herokuapp.com)
 
 
 
@@ -159,16 +155,16 @@ Project Link: [Bambi Official Webapp](https://bambi.app)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/harunmohamed/bambi-v3.svg?style=flat-square
-[contributors-url]: https://github.com/harunmohamed/bambi-v3/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/harunmohamed/bambi-v3.svg?style=flat-square
-[forks-url]: https://github.com/harunmohamed/bambi-v3/network/members
-[stars-shield]: https://img.shields.io/github/stars/harunmohamed/bambi-v3.svg?style=flat-square
-[stars-url]: https://github.com/harunmohamed/bambi-v3/stargazers
-[issues-shield]: https://img.shields.io/github/issues/harunmohamed/bambi-v3.svg?style=flat-square
-[issues-url]: https://github.com/harunmohamed/bambi-v3/issues
-[license-shield]: https://img.shields.io/github/license/harunmohamed/bambi-v3.svg?style=flat-square
-[license-url]: https://github.com/harunmohamed/bambi-v3/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/harunmohamed/dating.svg?style=flat-square
+[contributors-url]: https://github.com/harunmohamed/dating/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/harunmohamed/dating.svg?style=flat-square
+[forks-url]: https://github.com/harunmohamed/dating/network/members
+[stars-shield]: https://img.shields.io/github/stars/harunmohamed/dating.svg?style=flat-square
+[stars-url]: https://github.com/harunmohamed/dating/stargazers
+[issues-shield]: https://img.shields.io/github/issues/harunmohamed/dating.svg?style=flat-square
+[issues-url]: https://github.com/harunmohamed/dating/issues
+[license-shield]: https://img.shields.io/github/license/harunmohamed/dating.svg?style=flat-square
+[license-url]: https://github.com/harunmohamed/dating/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/harunmohamed
-[product-screenshot]: https://i.imgur.com/W676Xya.png
+[product-screenshot]: https://i.imgur.com/QDQAtXZ.png
