@@ -6,20 +6,20 @@
     <meta http-equiv="Content-Language" content="en-au">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Bambi is fun social network for students at Near East University to Match, Chat" />
-    <meta property="og:description" content="Bambi is a fun social network for students at Near East University to Match, Chat" />
-    <meta property="og:image" href="https://image.flaticon.com/icons/svg/2990/2990525.svg" />
+    <meta property="og:description" content="Bambi Dating is a fun social network for students at Near East University to Match, Chat and Date" />
+    <meta property="og:image" href="{{ url_for('static', filename='resources/' + 'logo.svg') }}" />
     <link rel="canonical" href="http://bambi.app/dating">
     <meta property="og:title" content="Bambi Dating by Harun Mohamed">
-    <meta property="og:description" content="Bambi Dating is a fun social network for students at Near East University to Match, Chat">
+    <meta property="og:description" content="Bambi Dating is a fun social network for students at Near East University to Match, Chat and Date">
     <meta property="og:url" content="http://bambi.app/dating">
     <meta property="og:site_name" content="Bambi">
-    <meta property="og:image" content="https://image.flaticon.com/icons/svg/2990/2990525.svg">
+    <meta property="og:image" content="{{ url_for('static', filename='resources/' + 'logo.svg') }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="Bambi Dating is a fun social network for students at Near East University to Match, Chat">
+    <meta name="twitter:description" content="Bambi Dating is a fun social network for students at Near East University to Match, Chat and Date">
     <meta name="twitter:title" content="Bambi Dating by Harun Mohamed">
     <meta name="twitter:domain" content="Bambi">
     <meta name="twitter:creator" content="@harunnmohamed">
-    <meta name="twitter:image:src" content="https://image.flaticon.com/icons/svg/2990/2990525.svg">
+    <meta name="twitter:image:src" content="{{ url_for('static', filename='resources/' + 'logo.svg') }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -30,7 +30,7 @@
 
 
 
-    <link rel="shortcut icon" type="image/png" href="https://image.flaticon.com/icons/svg/2990/2990525.svg">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='resources/' + 'logo.svg') }}">
     {% if title %}
       <title>Bambi - {{ title }}</title>
     {% else %}
