@@ -267,9 +267,9 @@ section .btn {
 
 
         <ul>
-          <li style="font-size:22px;"><span class="profile-stat-count">3</span> <small>matches</small></li>
-          <li style="font-size: 22px;" data-toggle="modal" data-target="#followers"><span class="profile-stat-count">{{ user.followers.count() }}</span> <small>followers</small></li>
-          <li style="font-size: 22px;" data-toggle="modal" data-target="#following"><span class="profile-stat-count">{{ user.followed.count() }}</span> <small>following</small></li>
+          <li style="font-size:22px;"><span class="profile-stat-count">{{mutual}}</span> <small>matches</small></li>
+          <li style="font-size: 22px;" {% if user == current_user %} data-toggle="modal" data-target="#followers" {% endif %}><span class="profile-stat-count">{{ user.followers.count() }}</span> <small>followers</small></li>
+          <li style="font-size: 22px;" {% if user == current_user %} data-toggle="modal" data-target="#following" {% endif %}><span class="profile-stat-count">{{ user.followed.count() }}</span> <small>following</small></li>
         </ul>
 
       </div>
@@ -363,9 +363,9 @@ section .btn {
     <div class="col-lg-6">
      
       <div class="row">
-        <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail" style="width:33.3%;">
-        <img src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="default profile" class="profile-thumbnail" style="width:33.3%;">
-        <img src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="default profile" class="profile-thumbnail" style="width:33.3%;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail" style="width:33%;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="default profile" class="profile-thumbnail" style="width:33%;margin-left:3px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="default profile" class="profile-thumbnail" style="width:33%;margin-left:3px;">
       </div>
 
 </div>

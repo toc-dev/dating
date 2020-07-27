@@ -198,12 +198,11 @@ def user_posts(username):
 		dp = url_for('static', filename='profile_pics/' + current_user.dp)
 		user = User.query.filter_by(username=username).first_or_404()
 		users = User.query.all()
-		mutual = []
+		mutual = 0
 		for person in user.followers:
-			if person in user.followed:
-				mutual.append(person)
-				mutual_count = len(mutual)
-		return render_template('user_posts.html', user=user, users=users, title=user.username.title(),dp=dp, form=form)
+			if user.is_following(person):
+				mutual += 1
+		return render_template('user_posts.html', user=user, users=users, mutual=mutual, title=user.username.title(), dp=dp, form=form)
 	user = User.query.filter_by(username=username).first_or_404()
 	return render_template('user_posts.html', user=user, title=user.username.title())
 
