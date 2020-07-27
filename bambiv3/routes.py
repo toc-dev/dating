@@ -45,7 +45,7 @@ def messages():
 	users = User.query.all()
 	hour = datetime.now().hour
 	greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
-	return render_template('messages.html', users=users, greeting=greeting, recent_chats=recent_chats)
+	return render_template('messages.html', users=users, greeting=greeting, recent_chats=recent_chats, messages=messages_received)
 
 @app.route('/m/<recipient>', methods=['GET', 'POST'])
 @login_required
