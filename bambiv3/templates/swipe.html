@@ -5,12 +5,14 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-3 d-none d-lg-block position-fixed">
+      <a href="{{ url_for('user_posts',username=current_user.username) }}" style="text-decoration:none;">
       <header class="mb-2">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.dp) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <span class="mt-2 pt-1" style="font-size:20px;">{{greeting}} {{current_user.username.title()}}</span>
         </div>
       </header>
+    </a>
       <!-- notifications and relevant ads -->
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -27,13 +29,15 @@
       <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
         <h5 style="padding-left: 3px;">My Matches</h5>
         {% for user in users if user.is_following(current_user) and current_user.is_following(user) %}
+        <a href="{{url_for('message', recipient=user.username)}}" style="text-decoration:none;">
         <header>
-        <a href="{{url_for('message', recipient=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail"></a>
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{user.username}}</h3>
           <small>⏰ last seen {{ moment(user.last_seen).fromNow() }}</small>
         </div>
       </header>
+    </a>
       {% endfor %}
       </div>
         <div class="menu mt-2" style="background:#191917;border-radius:10px">
@@ -49,11 +53,12 @@
      <div class="card-columns">
    {% for user in users if not current_user.is_following(user) and current_user.gender != user.gender %}
       <div class="card" style="border:1px solid #191917;border-radius:5px;">
+        <a href="{{ url_for('user_posts',username=user.username) }}" style="text-decoration:none;">
         <div style="display:flex;overflow-x: auto">
-        <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
-        <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
-        <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="Card image cap" style="min-width:100%">
-        </div>
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="Card image cap" style="min-width:100%">
+        </div></a>
         {% if user != current_user %}
           <i class="fas fa-heart love" style="font-size:26px;position:absolute;top:8px;right:8px;text-shadow: 0 0 2px #191917;"></i>
         {% else %}
@@ -67,7 +72,7 @@
           <span style="text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:1.5px;">{{ user.gender }} • born {{user.age.strftime('%a, %b %d %Y.')}}</span> <br>
 
           <a href="{{url_for('user_posts', username=user.username)}}" style="color:#fff;">
-            <span class="card-title" style="font-size:30px;color:#F3EFA1;">{{user.username.title()}}</span> <br>
+            <span class="card-title" style="font-size:30px;color:#FE3C72;">{{user.username.title()}}</span> <br>
           </a>
           {% if user.bio %}<code style="color:#fff;"> {{user.bio}} </code> <br> {% endif %}
 

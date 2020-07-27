@@ -91,12 +91,14 @@ h1 {
     <div class="col-lg-3 d-none d-lg-block position-fixed">
       <!-- User info , photos -->
       {% if current_user.is_authenticated %}
+      <a href="{{ url_for('user_posts',username=current_user.username) }}" style="text-decoration:none;">
       <header class="mb-2">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.dp) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <span class="mt-2 pt-1" style="font-size:20px;">{{greeting}} {{current_user.username.title()}}</span>
         </div>
       </header>
+    </a>
 
       {% if current_user.is_authenticated %}
       <!-- notifications and relevant ads -->
@@ -115,16 +117,15 @@ h1 {
       <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
         <h5 style="padding-left: 3px;">My Matches</h5>
         {% for user in users if user.is_following(current_user) and current_user.is_following(user) %}
+        <a href="{{url_for('user_posts', username=user.username)}}" style="text-decoration:none;">
         <header>
-        <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail"></a>
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
           <h3>{{user.username}}</h3>
           <small>⏰ last seen {{ moment(user.last_seen).fromNow() }}</small>
         </div>
-        <div class="follow-btn">
-            
-          </div>
       </header>
+      </a>
       {% endfor %}
     {% endif %}
 </div>
@@ -148,11 +149,13 @@ h1 {
                 <div class="card">
                   <div class="card_image">
                     <div class="card" style="border:1px solid #191917;">
+                    <a href="{{ url_for('user_posts',username=user.username) }}" style="text-decoration:none;">
                     <div style="display:flex;overflow-x:auto">
                     <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
                     <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
                     <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="Card image cap" style="min-width:100%">
                     </div>
+                    </a>
                   </div>
                   <div class="card_content">
 
