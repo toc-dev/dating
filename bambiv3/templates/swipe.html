@@ -82,6 +82,20 @@
         </div>
       </div><!--card-->
   {% endfor %}
+  <div class="card" style="border:1px solid #191917;border-radius:5px;">
+        <div style="display:flex;overflow-x: auto">
+        <img class="card-img-top img-fluid" src="{{ url_for('static', filename='resources/' + 'intro.png') }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
+        </div>
+        
+        <div class="card-block p-2" style="background:#191917;">
+          <h2 class="card_title">Bambi <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:20px;height:20px;margin-top: -5px;" title="Verified"></h2>
+          <code style="color:#fff;"> Looks like you are out of people to match with </code> <br>
+
+          <small><a href="{{url_for('discover')}}">🔆 See who likes you</a></small>
+          <small class="pl-4"><a href="{{url_for('messages')}}">✉ Chat</a></small>
+
+        </div>
+    </div><!--card-->
   </div><!--card-columns-->
 
   <div style="margin-bottom: 60px;"></div>

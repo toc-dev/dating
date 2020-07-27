@@ -70,13 +70,16 @@ def message(recipient):
 	messages = sent.union(received).order_by(m.timestamp.asc())
 
 	#adding all names of people who texted me to recent chats
-	received_all = current_user.messages_received.order_by(m.timestamp.desc())
+	messages_received = current_user.messages_received.order_by(m.timestamp.desc())
+	messages_sent = current_user.messages_sent.order_by(m.timestamp.desc())
 	recent_chats = list()
-	for message in received_all:
+	for message in messages_received:
 		recent_chats.append(message.author)
+	for message in messages_sent:
+		recent_chats.append(message.recipient)
 	recent_chats = list(dict.fromkeys(recent_chats))
 
-	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , user=user, form=form, messages=messages, received_all=received_all, recent_chats=recent_chats)
+	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , user=user, form=form, messages=messages, recent_chats=recent_chats)
 
 @app.route('/discover')
 @login_required

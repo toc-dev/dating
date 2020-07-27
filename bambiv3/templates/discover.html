@@ -168,10 +168,12 @@ h1 {
               {% endfor %}
               <li class="cards_item">
                 <div class="card">
-                  <div class="card_image"><img src="{{ url_for('static', filename='resources/' + 'default.jpg') }}" style="width:100%;"></div>
+                  <div class="card_image"><img src="{{ url_for('static', filename='resources/' + 'intro.png') }}" style="width:100%;"></div>
                   <div class="card_content">
-                    <h2 class="card_title">Bambi<i class="far fa-check-circle"></i></h2>
-                    <p class="card_text">Wanna see more friend matches for you? <a href="{{url_for('home')}}">Start Swiping!</a></p>
+                    <h2 class="card_title">Bambi <i class="far fa-check-circle"></i></h2>
+                    <code style="color:#000;"> Looks like you are out of likes </code> <br>
+                    <small><a href="{{url_for('home')}}">❤ continue matching</a></small>
+                    <small class="pl-4"><a href="{{url_for('messages')}}">✉ Chat</a></small>
                   </div>
                 </div>
               </li>
