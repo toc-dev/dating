@@ -297,17 +297,6 @@ section .btn {
             {%endif%}
           {%endif%}
 
-          <!-- mutual friends -->
-          {% if current_user.is_authenticated and user != current_user %}
-          <div class="mb-1" style="margin-top: -10px">
-            <code style="font-size:13px;" class="mr-2 text-muted">follows</code>
-          {% for user in user.followed %}
-            {% if user in current_user.followed %}
-            <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" style="width:20px;height:20px;border-radius:50%;margin-left:-10px;border:1px solid #000;" title="{{user.username.title()}}"></a>
-            {% endif %}
-        {% endfor %}
-        </div>
-        {% endif %}
 
 
       </div>
@@ -352,7 +341,7 @@ section .btn {
   <!-- albums -->
 
 
-   <div class="menu mt-2" style="background:#191917;border-radius:10px">
+   <div class="menu mt-2 d-none d-lg-block" style="background:#191917;border-radius:10px">
         <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
         </div>
 
@@ -367,6 +356,10 @@ section .btn {
         <img src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="default profile" class="profile-thumbnail" style="width:33%;">
         <img src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="default profile" class="profile-thumbnail" style="width:33%;">
       </div>
+
+      <div class="menu mt-2 mb-2 d-block d-lg-none" style="background:#191917;border-radius:5px">
+        <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
+        </div>
 
 </div>
 

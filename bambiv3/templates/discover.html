@@ -38,13 +38,13 @@ h1 {
 
 @media (min-width: 40rem) {
   .cards_item {
-    width: 50%;
+    width: 33%;
   }
 }
 
 @media (min-width: 56rem) {
   .cards_item {
-    width: 50%;
+    width: 33%;
   }
 }
 
@@ -59,7 +59,7 @@ h1 {
 
 .card img{
   height: 250px;
-  width:100%;
+  min-width:100%;
 }
 
 .card_content {
@@ -94,7 +94,7 @@ h1 {
       <header class="mb-2">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.dp) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
-          <h3>{{current_user.username}}</h3>
+          <span class="mt-2 pt-1" style="font-size:20px;">{{greeting}} {{current_user.username.title()}}</span>
         </div>
       </header>
 
@@ -119,15 +119,10 @@ h1 {
         <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail"></a>
         <div class="profile-name">
           <h3>{{user.username}}</h3>
-          {% if user.country and user.country == current_user.country %}
-          <small>From {{user.country}}</small>
-          {% endif %}
-          {% if user.department == current_user.department %}
-          <small>Studies {{user.department}}</small>
-          {% endif %}
+          <small>⏰ last seen {{ moment(user.last_seen).fromNow() }}</small>
         </div>
         <div class="follow-btn">
-            {% if not current_user.is_following(user) %}<a class="pt-2 pl-2" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;">Follow</a>{% endif %}
+            
           </div>
       </header>
       {% endfor %}
@@ -142,34 +137,30 @@ h1 {
 
 
 
-    <div class="col-lg-6 offset-lg-3">
+    <div class="col-lg-9 offset-lg-3">
       <!-- content area -->
           <h2>See who likes you</h2>
 
           <div class="main">
             <ul class="cards">
-              {% for user in users if user != current_user and not current_user.is_following(user) and user.is_following(current_user) %}
+              {% for user in users if user != current_user and not current_user.is_following(user) and user.is_following(current_user) and user.gender != current_user.gender %}
               <li class="cards_item">
                 <div class="card">
-                  <div class="card_image"><a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" style="width:100%;"></a></div>
-                  <div class="card_content">
-                    <h2 class="card_title">{{user.username}} {% if not current_user.is_following(user) %}<a class="btn btn-sm btn-outline-primary mb-1" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;color:#000;">Follow</a>{% endif %} </h2>
-                    <p class="card_text">{% if user.bio %} {{user.bio | safe}} {% else %} I'm from {{user.country}} and I study {{user.department}}.{% endif %}</p>
-                    {% if user.single and user.gender != current_user.gender %}
-                    {% if user.instagram %}<a href="https://www.instagram.com/{{user.instagram}}"><img src="https://image.flaticon.com/icons/svg/733/733614.svg" style="width:30px;height:30px;"></a>{% endif %}
-                    {% if user.snapchat %} <a href="https://www.snapchat.com/add/{{user.snapchat}}"><img src="https://image.flaticon.com/icons/svg/174/174870.svg" style="width:30px;height:30px;"></a>{% endif %}
-                    {% endif %}
-                    <!-- mutual friends -->
-                    {% if user != current_user %}
-                    <div class="mb-1 mt-2" style="margin-top: -10px">
-                      <code style="font-size:13px;color:#000;" class="mr-2">follows</code>
-                    {% for user in user.followed %}
-                      {% if user in current_user.followed %}
-                      <a href="{{url_for('user_posts', username=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" style="width:20px;height:20px;border-radius:50%;margin-left:-10px;border:1px solid #000;" title="{{user.username.title()}}"></a>
-                      {% endif %}
-                  {% endfor %}
+                  <div class="card_image">
+                    <div class="card" style="border:1px solid #191917;">
+                    <div style="display:flex;overflow-x:auto">
+                    <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="Card image cap" style="min-width:95%;border-right:1px solid #000;">
+                    <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
+                    <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="Card image cap" style="min-width:100%">
+                    </div>
                   </div>
-                  {% endif %}
+                  <div class="card_content">
+
+                    <!--<h2 class="card_title">{{user.username}}</h2>-->
+                    <code class="card_text">{% if user.bio %} {{user.bio | safe}} {% endif %}</code> <br>
+                    {% if user.country %} <small class="text-muted">🌍 From {{user.country}}</small> {% endif %}
+                    <small class="pl-3 text-muted">😎 studies {{user.department}}</small> <br>
+                    <a class="btn btn-sm btn-outline-primary mt-2" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;color:#191917;">Follow</a>
 
                   </div>
                 </div>

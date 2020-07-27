@@ -34,13 +34,18 @@ def home():
 def messages():
 	current_user.last_message_read_time = datetime.utcnow()
 	db.session.commit()
-	messages = current_user.messages_received.order_by(m.timestamp.desc())
+	messages_received = current_user.messages_received.order_by(m.timestamp.desc())
+	messages_sent = current_user.messages_sent.order_by(m.timestamp.desc())
 	recent_chats = list()
-	for message in messages:
+	for message in messages_received:
 		recent_chats.append(message.author)
+	for message in messages_sent:
+		recent_chats.append(message.recipient)
 	recent_chats = list(dict.fromkeys(recent_chats))
 	users = User.query.all()
-	return render_template('messages.html', messages=messages, users=users, recent_chats=recent_chats)
+	hour = datetime.now().hour
+	greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
+	return render_template('messages.html', users=users, greeting=greeting, recent_chats=recent_chats)
 
 @app.route('/m/<recipient>', methods=['GET', 'POST'])
 @login_required
@@ -77,7 +82,9 @@ def message(recipient):
 @login_required
 def discover():
 	users = User.query.all()
-	return render_template('discover.html', users=users, title='Discover')
+	hour = datetime.now().hour
+	greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
+	return render_template('discover.html', users=users, greeting=greeting, title='Discover')
 
 
 @app.route('/register', methods=['GET', 'POST'])

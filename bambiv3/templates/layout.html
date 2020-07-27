@@ -92,7 +92,14 @@ ul.nav li:last-child a {
       <a href="{{url_for('discover')}}"><img src="https://image.flaticon.com/icons/svg/1828/1828884.svg" style="width:30px;height:30px;"></a>
     </li>
     <li {% if '/messages' == request.path %}  class="active" {% endif %}>
-      <a href="{{url_for('messages')}}"><img src="https://image.flaticon.com/icons/svg/893/893257.svg" style="width:30px;height:30px;"></a>
+      <a href="{{url_for('messages')}}">
+        <img src="https://image.flaticon.com/icons/svg/893/893257.svg" style="width:30px;height:30px;">
+        {% if current_user.is_authenticated %}
+        {% set new_messages = current_user.new_messages() %}
+        <span id="message_count" class="badge badge-warning"style="visibility: 
+        {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span>
+      {% endif %}
+      </a>
     </li>
     <li>
       <a href="{{url_for('user_posts', username=current_user.username)}}"><img src="https://www.flaticon.com/premium-icon/icons/svg/3133/3133799.svg" style="width:30px;height:30px;"></a>
@@ -138,6 +145,12 @@ ul.nav li:last-child a {
             $('#message_count').css('visibility', n ? 'visible' : 'hidden');
         }
     </script>
+
+    <script>
+     $('.love').click(function(){
+      $(this).toggleClass('liked');
+    });
+  </script>
 
 {% endblock %}
 

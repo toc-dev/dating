@@ -8,7 +8,7 @@
       <header class="mb-2">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.dp) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
-          <h3>{{current_user.username}}</h3>
+          <span class="mt-2 pt-1" style="font-size:20px;">{{greeting}} {{current_user.username.title()}}</span>
         </div>
       </header>
       <!-- notifications and relevant ads -->
@@ -31,6 +31,7 @@
         <a href="{{url_for('message', recipient=user.username)}}"><img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail"></a>
         <div class="profile-name">
           <h3>{{user.username}}</h3>
+          <small>⏰ last seen {{ moment(user.last_seen).fromNow() }}</small>
         </div>
       </header>
       {% endfor %}
@@ -44,11 +45,12 @@
 
     <div class="col-lg-9 offset-lg-3">
      
+     <h2>Jump back in.</h2>
      <div class="card-columns">
-   {% for user in users %}
+   {% for user in users if not current_user.is_following(user) and current_user.gender != user.gender %}
       <div class="card" style="border:1px solid #191917;border-radius:5px;">
         <div style="display:flex;overflow-x: auto">
-        <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
+        <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="Card image cap" style="min-width:95%;border-right:1px solid #000;">
         <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
         <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="Card image cap" style="min-width:100%">
         </div>
@@ -69,8 +71,8 @@
           </a>
           {% if user.bio %}<code style="color:#fff;"> {{user.bio}} </code> <br> {% endif %}
 
-          {% if user.country %} <small>📌 From {{user.country}}</small> {% endif %}
-          <small class="pl-3">📞 studies {{user.department}}</small>
+          {% if user.country %} <small>🌍 From {{user.country}}</small> {% endif %}
+          <small class="pl-3">😎 studies {{user.department}}</small>
           
 
           <div style="display:flex;" class="mt-2">
