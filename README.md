@@ -59,7 +59,7 @@ In this section, you can match with other users and if they like you back, you c
 
 ## See who likes you
 [![Likes][likes]](https://neudating.herokuapp.com/discover)
-Here, you can see users who like you. hen you like them back, it is an automatic match! The names of the users who like you
+Here, you can see users who like you and if you like them back, it is an automatic match! The names of the users who like you
 are abstracted for privacy and to make the experience holistic
 
 ## Message your matches 
