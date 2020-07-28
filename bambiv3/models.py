@@ -20,7 +20,7 @@ followers = db.Table(
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(20), unique=True, nullable=False)
-	email = db.Column(db.String(120), unique=True, nullable=True)
+	email = db.Column(db.String(120), default="xyz@bambi.app", unique=True, nullable=True)
 	dp = db.Column(db.String(20), nullable=False, default='default.jpg')
 	dp2 = db.Column(db.String(20), nullable=False, default='flip.png')
 	dp3 = db.Column(db.String(20), nullable=False, default='plane.png')
@@ -31,11 +31,11 @@ class User(db.Model, UserMixin):
 	student_number = db.Column(db.Integer(), unique=True, nullable=True)
 	age = db.Column(db.DateTime, nullable=False)
 	gender = db.Column(db.String(20), nullable=False)
-	country = db.Column(db.String(20), nullable=True)
+	country = db.Column(db.String(20), default="Cyprus", nullable=True)
 	bio = db.Column(db.String(120), nullable=True)
 	private = db.Column(db.Boolean, default=False, nullable=False)
-	snapchat = db.Column(db.String(20), default=False, nullable=True)
-	instagram = db.Column(db.String(20), default=False, nullable=True)
+	snapchat = db.Column(db.String(20), default="snapchat", nullable=True)
+	instagram = db.Column(db.String(20), default="instagram", nullable=True)
 	followed = db.relationship(
 		'User', secondary=followers,
 		primaryjoin=(followers.c.follower_id == id),
