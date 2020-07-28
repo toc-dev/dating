@@ -128,7 +128,7 @@ def login():
 @app.route('/logout')
 def logout():
 	logout_user()
-	return render_template('intro.html', title="Intro")
+	return redirect('home')
 
 
 @app.route('/account', methods=['GET', 'POST'])
