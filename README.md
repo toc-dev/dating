@@ -58,17 +58,17 @@
 Welcome to the official Bambi Dating Repository. On this version of Bambi, the user can do the following:
 
 ##Match with users
-[product-screenshot]
+[![Matches][product-screenshot]]
 In this section, you can match with other users and if they like you back, you can start chatting and hitting it off
 ##See who likes you
-[likes]
+[![Likes][likes]]
 Here, you can see users who like you. hen you like them back, it is an automatic match! The names of the users who like you
 are abstracted for privacy and to make the experience holistic
 ##Message your matches 
-[messages]
+[![Messages][messages]]
 Once matching with other users, you can message each other here
 ##View and Modify your profile
-[profile]
+[![Profile][profile]]
 On your profile, your match and likes count are displayed. Only you can see the specific list of people who you have
 matched with or who like you. You can also edit account information on this page such as profile images and profile bio
 
