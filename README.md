@@ -178,5 +178,5 @@ Project Link: [Bambi Dating Official Webapp](https://neudating.herokuapp.com)
 [linkedin-url]: https://linkedin.com/in/harunmohamed
 [matches]: https://i.imgur.com/vB42ikW.png
 [likes]: https://i.imgur.com/hsNJqc7.png
-[messages]: https://i.imgur.com/rj7BMFZ.jpg
+[messages]: https://i.imgur.com/WGHaz9x.png
 [profile]: https://i.imgur.com/zGcXGT6.jpg
