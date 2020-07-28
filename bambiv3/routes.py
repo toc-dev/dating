@@ -36,16 +36,19 @@ def messages():
 	db.session.commit()
 	messages_received = current_user.messages_received.order_by(m.timestamp.desc())
 	messages_sent = current_user.messages_sent.order_by(m.timestamp.desc())
+
+	#recent chats
 	recent_chats = list()
 	for message in messages_received:
 		recent_chats.append(message.author)
 	for message in messages_sent:
 		recent_chats.append(message.recipient)
 	recent_chats = list(dict.fromkeys(recent_chats))
+
 	users = User.query.all()
 	hour = datetime.now().hour
 	greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
-	return render_template('messages.html', users=users, greeting=greeting, recent_chats=recent_chats, messages=messages_received)
+	return render_template('messages.html', users=users, greeting=greeting, recent_chats=recent_chats, messages_sent=messages_sent, messages_received=messages_received)
 
 @app.route('/m/<recipient>', methods=['GET', 'POST'])
 @login_required
