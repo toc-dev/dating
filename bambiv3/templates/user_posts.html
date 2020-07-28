@@ -276,26 +276,26 @@ section .btn {
 
       <div class="profile-bio">
 
-        <p class="mb-2" style="font-size:18px;"><small class="profile-real-name" style="font-size:18px;font-weight:400">
-          {% if user.username == "harun" %}
-          <code>{% if user.email %} {{user.email.split("@")[0] | lower}} {% endif %}</code>☁</small> - <code style="color:#fff;">making obnoxious life decisions since '00.</code>
-          <br>
-          <code>
-            <a class="badge badge-warning" style="color:#000;">💦Founder, Bambi</a> 
-            <a class="badge badge-primary" style="color:#000;">💻code</a> 
-            <a class="badge badge-danger" style="color:#000;">🚊travel</a> 
-            <a class="badge badge-success" style="color:#000;">🎱billiards</a> 
-            <a class="badge badge-info" style="color:#000;">⚽football</a>
-          </code>
-        </p>
-
-          {%else%}
+        <p class="mb-2" style="font-size:18px;">
+            <!--<code>{% if user.email %} {{user.email.split("@")[0] | lower}} {% endif %} - </code>-->
+            <code>{{user.username}} - </code>
             {% if user.bio %}
-            <code>{% if user.email %} {{user.email.split("@")[0] | lower}} {% endif %}</code></small> - <code style="color:#fff;">{{user.bio | safe}}</code></p>
+            <code style="color:#fff;">{{user.bio | safe}}</code>
             {% else %}
-          <code>{% if user.email %} {{user.email.split("@")[0] | lower}} {% endif %}</code></small> - <code style="color:#fff;">hey there, lets be friends 🤗</code>
+            <code style="color:#fff;">hey there, lets be friends 🤗</code>
             {%endif%}
-          {%endif%}
+            <br>
+
+            {% if user.username == 'harun' %}
+              <code>
+              <a class="badge badge-warning" style="color:#000;">💦Founder, Bambi</a> 
+              <a class="badge badge-primary" style="color:#000;">💻code</a> 
+              <a class="badge badge-danger" style="color:#000;">🚊travel</a> 
+              <a class="badge badge-success" style="color:#000;">🎱billiards</a> 
+              <a class="badge badge-info" style="color:#000;">⚽football</a>
+              </code>
+            {% endif %}
+        </p>
 
 
 
@@ -352,9 +352,9 @@ section .btn {
     <div class="col-lg-6">
      
       <div class="row mt-3">
-        <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail" style="width:33%;">
-        <img src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="default profile" class="profile-thumbnail" style="width:33%;">
-        <img src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="default profile" class="profile-thumbnail" style="width:33%;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail" style="width:33%;max-height:400px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="default profile" class="profile-thumbnail" style="width:33%;max-height:400px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="default profile" class="profile-thumbnail" style="width:33%;max-height:400px;">
       </div>
 
       <div class="menu mt-2 mb-2 d-block d-lg-none" style="background:#191917;border-radius:5px">
@@ -519,7 +519,7 @@ section .btn {
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="height:600px;overflow:auto;">
           <div class="modal-body">
-            <div class="card" style="color:#000;text-align:center;">
+            <div class="card" style="color:#000;">
             <img class="card-img-top" src="{{ dp }}" alt="Card image cap" style="height:250px;">
             <div class="card-body">
                <div class="content-section">
@@ -527,19 +527,8 @@ section .btn {
           <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-              <!--<legend class="border-bottom mb-2 pb-2">Account Info</legend>-->
-              <div class="form-check">
-              <div class="row">
-                <div class="col">
-                  {{ form.private(class="form-check-input") }}
-                  {{ form.private.label(class="form-check-label") }}
-                </div>
-              </div>
-            </div>
-              <div class="row">
-                <div class="col">
-                <div class="form-group">
-                  {{ form.picture.label() }}
+                <span class="form-control-label">Profile Images</span>
+                <div class="form-group mt-2">
                   {{ form.picture(class="form-control-file") }}
                   {% if form.picture.errors %}
                     {% for error in form.picture.errors %}
@@ -547,10 +536,7 @@ section .btn {
                     {% endfor %}
                   {% endif %}
                 </div>
-               </div>
-             <div class="col">
                 <div class="form-group">
-                  {{ form.picture2.label() }}
                   {{ form.picture2(class="form-control-file") }}
                   {% if form.picture2.errors %}
                     {% for error in form.picture2.errors %}
@@ -558,10 +544,7 @@ section .btn {
                     {% endfor %}
                   {% endif %}
                 </div>
-            </div>
-              <div class="col">
                 <div class="form-group">
-                  {{ form.picture3.label() }}
                   {{ form.picture3(class="form-control-file") }}
                   {% if form.picture3.errors %}
                     {% for error in form.picture3.errors %}
@@ -569,8 +552,6 @@ section .btn {
                     {% endfor %}
                   {% endif %}
                 </div>
-            </div>
-              </div>
               <div class="form-group">
                 {{ form.bio.label(class="form-control-label") }}
                 {% if form.bio.errors %}
@@ -691,6 +672,10 @@ section .btn {
                 {% else %}
                 {{ form.age(class="form-control form-control-lg") }}
                 {% endif %}
+              </div>
+              <div class="form-check">
+                  {{ form.private(class="form-check-input") }}
+                  {{ form.private.label(class="form-check-label") }}
               </div>
             </fieldset>
             <div class="modal-footer form-group">

@@ -2,95 +2,9 @@
 {% block content %}
 
 
-<style>
-/* Font */
-@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
-
-/* Design */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-.main{
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-h1 {
-    font-size: 24px;
-    font-weight: 400;
-    text-align: center;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.cards_item {
-  display: flex;
-  padding: 1rem;
-}
-
-@media (min-width: 40rem) {
-  .cards_item {
-    width: 33%;
-  }
-}
-
-@media (min-width: 56rem) {
-  .cards_item {
-    width: 33%;
-  }
-}
-
-.card {
-  background-color: white;
-  border-radius: 0.25rem;
-  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.card img{
-  height: 250px;
-  min-width:100%;
-}
-
-.card_content {
-  padding: 1rem;
-  background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
-  height: 100%;
-}
-
-.card_title {
-  color: #000;
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  margin: 0px;
-}
-
-.card_text {
-  color: #000;
-  font-size: 1.0rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-</style>
-
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-3 d-none d-lg-block position-fixed">
-      <!-- User info , photos -->
-      {% if current_user.is_authenticated %}
       <a href="{{ url_for('user_posts',username=current_user.username) }}" style="text-decoration:none;">
       <header class="mb-2">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.dp) }}" alt="default profile" class="profile-thumbnail">
@@ -99,8 +13,6 @@ h1 {
         </div>
       </header>
     </a>
-
-      {% if current_user.is_authenticated %}
       <!-- notifications and relevant ads -->
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -117,7 +29,7 @@ h1 {
       <div style="background:#191917;padding:7px;cursor:pointer;border-radius:5px;overflow:auto;height:318px;">
         <h5 style="padding-left: 3px;">My Matches</h5>
         {% for user in users if user.is_following(current_user) and current_user.is_following(user) %}
-        <a href="{{url_for('user_posts', username=user.username)}}" style="text-decoration:none;">
+        <a href="{{url_for('message', recipient=user.username)}}" style="text-decoration:none;">
         <header>
         <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
@@ -125,75 +37,76 @@ h1 {
           <small>⏰ last seen {{ moment(user.last_seen).fromNow() }}</small>
         </div>
       </header>
-      </a>
+    </a>
       {% endfor %}
-    {% endif %}
-</div>
-
-    <div class="menu mt-2" style="background:#191917;border-radius:10px;">
-      <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
-    </div>
-  {% endif %}
-</div>
+      </div>
+        <div class="menu mt-2" style="background:#191917;border-radius:10px">
+        <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
+        </div>
+      </div>
 
 
 
     <div class="col-lg-9 offset-lg-3">
-      <!-- content area -->
-          <h2>See who likes you</h2>
+     
+     <h2>See who likes you.</h2>
+     <div class="card-columns">
+      {% for user in users if user != current_user and not current_user.is_following(user) and user.is_following(current_user) and user.gender != current_user.gender %}
+      {% if user %}
+      <div class="card" style="border:1px solid #191917;border-radius:5px;">
+        <a href="{{ url_for('user_posts',username=user.username) }}" style="text-decoration:none;">
+        <div style="display:flex;overflow-x: auto">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="Card image cap" style="min-width:100%;max-height:400px;border-right:1px solid #000;">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="Card image cap" style="min-width:100%;max-height:400px;border-right:1px solid #000;">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="Card image cap" style="min-width:100%;max-height:400px;">
+        </div></a>
+        {% if user != current_user %}
+          <a href="{{ url_for('follow', username=user.username) }}" style="color:#fff;"><i class="fas fa-heart love" style="font-size:26px;position:absolute;top:8px;right:8px;text-shadow: 0 0 2px #191917;"></i></a>
+        {% endif %}
 
-          <div class="main">
-            <ul class="cards">
-              {% for user in users if user != current_user and not current_user.is_following(user) and user.is_following(current_user) and user.gender != current_user.gender %}
-              <li class="cards_item">
-                <div class="card">
-                  <div class="card_image">
-                    <div class="card" style="border:1px solid #191917;">
-                    <a href="{{ url_for('user_posts',username=user.username) }}" style="text-decoration:none;">
-                    <div style="display:flex;overflow-x:auto">
-                    <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
-                    <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="Card image cap" style="min-width:100%;border-right:1px solid #000;">
-                    <img class="card-img-top img-fluid" src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="Card image cap" style="min-width:100%">
-                    </div>
-                    </a>
-                  </div>
-                  <div class="card_content">
+        <div class="card-block p-2" style="background:#191917;">
+          
+          {% if user.bio %}<code style="color:#fff;"> {{user.bio}} </code> <br> {% endif %}
 
-                    <!--<h2 class="card_title">{{user.username}}</h2>-->
-                    <code class="card_text">{% if user.bio %} {{user.bio | safe}} {% endif %}</code> <br>
-                    {% if user.country %} <small class="text-muted">🌍 From {{user.country}}</small> {% endif %}
-                    <small class="pl-3 text-muted">😎 studies {{user.department}}</small> <br>
-                    <a class="btn btn-sm btn-outline-primary mt-2" href="{{ url_for('follow', username=user.username) }}" style="font-size:12px;text-decoration:none;color:#191917;">Follow</a>
+          {% if user.country %} <small>🌍 From {{user.country}}</small> {% endif %}
+          <small class="pl-3">😎 studies {{user.department}}</small>
+          
 
-                  </div>
-                </div>
-              </li>
-              {% endfor %}
-              <li class="cards_item">
-                <div class="card">
-                  <div class="card_image"><img src="{{ url_for('static', filename='resources/' + 'intro.PNG') }}" style="width:100%;"></div>
-                  <div class="card_content">
-                    <h2 class="card_title">Bambi <i class="far fa-check-circle"></i></h2>
-                    <code style="color:#000;"> Looks like you are out of likes </code> <br>
-                    <small><a href="{{url_for('home')}}">❤ continue matching</a></small>
-                    <small class="pl-4"><a href="{{url_for('messages')}}">✉ Chat</a></small>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
+          <div style="display:flex;" class="mt-2">
+            <p><a class="btn btn-sm btn-primary mt-2 ml-1 px-4" href="{{ url_for('follow', username=user.username) }}">match</a></p>
+          </div><!--seller div-->
 
+        </div>
+      </div><!--card-->
+      {% else%}
+      <div class="card" style="border:1px solid #191917;border-radius:5px;">
+        <div style="display:flex;overflow-x: auto">
+        <img class="card-img-top img-fluid" src="{{ url_for('static', filename='resources/' + 'intro.PNG') }}" alt="Card image cap" style="max-width:100%;max-height:230px;border-right:1px solid #000;">
+        </div>
+        
+        <div class="card-block p-2" style="background:#191917;">
+          <h2 class="card_title">Bambi <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:20px;height:20px;margin-top: -5px;" title="Verified"></h2>
+          <code style="color:#fff;"> Looks like you are out of likes </code> <br>
 
-    </div>
+          <small><a href="{{url_for('home')}}">❤ continue matching</a></small>
+          <small class="pl-4"><a href="{{url_for('messages')}}">✉ Chat</a></small>
+
+        </div>
+    </div><!--card-->
+    {% endif %}
+  {% endfor %}
+  </div><!--card-columns-->
+
+  <div style="margin-bottom: 60px;"></div>
+</div>
 
 
 
-    <div class="col-lg-3 d-none d-lg-block position-fixed offset-lg-9">
-    </div>
+    <!--<div class="col-lg-3 d-none d-lg-block position-fixed offset-sm-9">
+      
+</div>-->
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+</div>
 
 
 
