@@ -57,10 +57,20 @@
 
 Welcome to the official Bambi Dating Repository. On this version of Bambi, the user can do the following:
 
-* Match with users
-* See who likes you
-* Message your matches 
-* View and Modify your profile
+##Match with users
+[product-screenshot]
+In this section, you can match with other users and if they like you back, you can start chatting and hitting it off
+##See who likes you
+[likes]
+Here, you can see users who like you. hen you like them back, it is an automatic match! The names of the users who like you
+are abstracted for privacy and to make the experience holistic
+##Message your matches 
+[messages]
+Once matching with other users, you can message each other here
+##View and Modify your profile
+[profile]
+On your profile, your match and likes count are displayed. Only you can see the specific list of people who you have
+matched with or who like you. You can also edit account information on this page such as profile images and profile bio
 
 Bambi Dating is in active production and more features are in the pipeline.
 
@@ -167,4 +177,7 @@ Project Link: [Bambi Dating Official Webapp](https://neudating.herokuapp.com)
 [license-url]: https://github.com/harunmohamed/dating/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/harunmohamed
-[product-screenshot]: https://i.imgur.com/QDQAtXZ.png
+[product-screenshot]: https://i.imgur.com/vB42ikW.png
+[likes]: https://i.imgur.com/hsNJqc7.png
+[messages]: https://i.imgur.com/rj7BMFZ.jpg
+[profile]: https://i.imgur.com/zGcXGT6.jpg
