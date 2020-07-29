@@ -186,11 +186,13 @@ def user_posts(username):
 				pic3 = profile_img(form.picture3.data)
 				current_user.dp3 = pic3
 			current_user.username = form.username.data.lower()
-			current_user.email = form.email.data
+			if form.email.data:
+				current_user.email = form.email.data
 			current_user.snapchat = form.snapchat.data
 			current_user.instagram = form.instagram.data
 			current_user.department = form.department.data
-			current_user.student_number = form.student_number.data
+			if form.student_number.data:
+				current_user.student_number = form.student_number.data
 			current_user.country = form.country.data
 			current_user.age = form.age.data
 			current_user.bio = form.bio.data

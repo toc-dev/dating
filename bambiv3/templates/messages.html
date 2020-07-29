@@ -40,8 +40,8 @@
               {{ top_message.append(message.body) }}
             {% endfor %}
             </span>
-            <small>
-              {{ top_message[0] }}
+            <small title="{{top_message[0]}}">
+              {{ top_message[0] | truncate(40) }}
             </small>
         </div>
       </header>
@@ -128,7 +128,7 @@
             {% endfor %}
             </span>
             <small>
-              {{ top_message[0] }}
+              {{ top_message[0] | truncate(50) }}
             </small>
         </div>
       </header>

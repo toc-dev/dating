@@ -20,7 +20,7 @@ followers = db.Table(
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(20), unique=True, nullable=False)
-	email = db.Column(db.String(120), default="xyz@bambi.app", unique=True, nullable=True)
+	email = db.Column(db.String(120), unique=True, nullable=True)
 	dp = db.Column(db.String(20), nullable=False, default='default.jpg')
 	dp2 = db.Column(db.String(20), nullable=False, default='flip.png')
 	dp3 = db.Column(db.String(20), nullable=False, default='plane.png')
