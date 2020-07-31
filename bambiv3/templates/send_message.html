@@ -89,29 +89,29 @@
 
       <div class="post" style="background:none;padding:2px;">
         <div id="inner">
-         <form method="POST" action="" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-              <!--<legend class="border-bottom mb-2 pb-2">Message {{recipient.title()}}</legend>-->
-            <div class="input-group mt-2">
-              {{ form.message.label(placeholder="message...", class="form-control-label") }}
-                  {% if form.message.errors %}
-                    {{ form.message(placeholder="message...", class="form-control form-control-sm is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.message.errors %}
-                          <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                  {% else %}
-                    {{ form.message(placeholder="type message...", class="form-control form-control-sm subtle", rows="2", style="border:2px solid #191917;height:55px;border-radius:5px 0px 0px 0px;") }}
-                  {% endif %}
 
-              <div class="input-group-append">
-                {{ form.submit(class="btn", style="margin-top:2px;border:2px solid #191917;border-left:none;") }}
+          <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="input-group mt-2">
+              {% if form.message.errors %}
+                {{ form.message(class="form-control border-0 rounded-0 resize-none dark-theme border border-dark", placeholder="type message...") }}
+                <div class="invalid-feedback">
+                  {% for error in form.message.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                  {% else %}
+                    {{ form.message(class="form-control border-0 rounded-0 resize-none dark-theme border border-dark", placeholder="type message...") }}
+                  {% endif %}
+                  <div class="input-group-append">
+                    {{ form.submit(class="btn btn-outline-dark btn-sm px-4 px-sm-5") }}
+                  </div>
               </div>
-            </div>
-        </form>
+          </form>
+
       </div>
   </div>
+
 </div>
 
 
