@@ -88,10 +88,8 @@
         </div>
 
       <div class="post" style="background:none;padding:2px;">
-        <div id="inner">
           <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
-            <div class="input-group mt-2 mr-2" style="overflow:hidden">
               {% if form.message.errors %}
                 {{ form.message(class="form-control border-0 rounded-0 resize-none dark-theme border border-dark", placeholder="type message...") }}
                 <div class="invalid-feedback">
@@ -102,13 +100,7 @@
                   {% else %}
                     {{ form.message(class="form-control border-0 rounded-0 resize-none dark-theme border border-dark", placeholder="type message...") }}
                   {% endif %}
-                  <div class="input-group-append">
-                    {{ form.submit(class="btn btn-outline-dark btn-sm p-3") }}
-                  </div>
-              </div>
           </form>
-
-      </div>
   </div>
 
 </div>
