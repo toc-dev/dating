@@ -34,7 +34,7 @@
 
 
 
-    <div class="col-lg-7 offset-lg-3" style="overflow-x:hidden;"> 
+    <div class="col-lg-7 offset-lg-3"> 
       
       <h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{user.username.title()}}
              {% if recipient in ["harun" , "bambi"] %}
@@ -42,7 +42,7 @@
              {% endif %}
            </a></h3>
 
-           <div style="overflow-y:auto;overflow-x:hidden;height:460px;padding:5px;">
+           <div style="overflow-y:auto;height:460px;padding:5px;">
 
 
       {% for message in messages %}
