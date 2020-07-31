@@ -102,11 +102,11 @@
                         {% endfor %}
                     </div>
                   {% else %}
-                    {{ form.message(placeholder="type message...", class="form-control form-control-sm subtle", rows="2", style="border:2px solid #191917;height:45px;border-radius:5px 0px;") }}
+                    {{ form.message(placeholder="type message...", class="form-control form-control-sm subtle", rows="2", style="border:2px solid #191917;height:55px;border-radius:5px 0px 0px 0px;") }}
                   {% endif %}
 
               <div class="input-group-append">
-                {{ form.submit(class="btn", style="margin-top:2px;border:2px solid #191917;") }}
+                {{ form.submit(class="btn", style="margin-top:2px;border:2px solid #191917;border-left:none;") }}
               </div>
             </div>
         </form>

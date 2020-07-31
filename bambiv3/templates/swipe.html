@@ -9,7 +9,7 @@
       <header class="mb-2">
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.dp) }}" alt="default profile" class="profile-thumbnail">
         <div class="profile-name">
-          <span class="mt-2 pt-1" style="font-size:20px;">{{greeting}} {{current_user.username.title()}}</span>
+          <span class="mt-2 pt-1" style="font-size:20px;color:#fff;">{{greeting}} {{current_user.username.title()}}</span>
         </div>
       </header>
     </a>
@@ -40,9 +40,10 @@
     </a>
       {% endfor %}
       </div>
-        <div class="menu mt-2" style="background:#191917;border-radius:10px">
-        <a class="dropdown-item" href="{{ url_for('logout') }}"> 🛫 Logout</a>
+        <div class="mt-2" style="background:#191917;padding:8px 8px 8px 32px;font-size:20px;display:block;border-radius:5px;">
+        <a href="{{ url_for('logout') }}" style="text-decoration:none;color:#818181;"> 🛫 Logout</a>
         </div>
+
       </div>
 
 
