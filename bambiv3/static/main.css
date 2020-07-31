@@ -143,18 +143,3 @@ header{
 ::-webkit-scrollbar-thumb:hover {
   background: #F9E9C8; 
 }
-
-.subtle{
-  background-color: #070707;
-  border: none;
-  padding-top: 5px;
-  margin-top: 2px;
-  margin-left: 10px;
-}
-.subtle:focus{
-  background-color: #070707;
-  outline:0px !important;
-  -webkit-appearance:none;
-  box-shadow: none !important;
-  color: #fff;
-}
