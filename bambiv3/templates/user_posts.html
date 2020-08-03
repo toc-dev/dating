@@ -273,7 +273,7 @@ section .btn {
 
 
         <ul>
-          <li style="font-size:22px;"><span class="profile-stat-count">{{mutual}}</span> <small>matches</small></li>
+          <li style="font-size:22px;" {% if user == current_user %} data-toggle="modal" data-target="#mutual" {% endif %}><span class="profile-stat-count">{{mutual}}</span> <small>matches</small></li>
           <li style="font-size: 22px;" {% if user == current_user %} data-toggle="modal" data-target="#followers" {% endif %}><span class="profile-stat-count">{{ user.followers.count() }}</span> <small>followers</small></li>
           <li style="font-size: 22px;" {% if user == current_user %} data-toggle="modal" data-target="#following" {% endif %}><span class="profile-stat-count">{{ user.followed.count() }}</span> <small>following</small></li>
         </ul>
@@ -443,6 +443,34 @@ section .btn {
     });
   </script>
 
+
+  <!-- Mutual Modal -->
+<div class="modal fade" id="mutual" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content" style="color:#000;height:310px;overflow:auto;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ mutual }} Matches</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% for user in users if current_user.is_following(user) and user.is_following(current_user) %}
+           <header style="background:none;color:#000;">
+          <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
+          <div class="profile-name">
+            <a href="{{ url_for('user_posts', username=user.username) }}" style="text-decoration:none;color:#000;">{{user.username}}</a>
+          </div>
+          <div class="follow-btn">
+              {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}<a style="font-size:12px;text-decoration:none;color:#1e90ff;">follows you</a>{% endif %}
+            </div>
+      </header>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- Followers Modal -->
 <div class="modal fade" id="followers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -454,7 +482,6 @@ section .btn {
         </button>
       </div>
       <div class="modal-body">
-        {% if current_user.is_authenticated %}
         {% for user in user.followers %}
           <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
@@ -466,14 +493,6 @@ section .btn {
             </div>
       </header>
         {% endfor %}
-        {% else %}
-          <header style="background:none;color:#000;">
-          <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
-          <div class="profile-name">
-            <a href="{{ url_for('follow', username=user.username) }}" style="text-decoration:none;color:#00376b;font-weight:500;">sign in to view who follows {{user.username.title()}}</a>
-          </div>
-      </header>
-        {% endif %}
       </div>
     </div>
   </div>
@@ -491,7 +510,6 @@ section .btn {
         </button>
       </div>
       <div class="modal-body">
-        {% if current_user.is_authenticated %}
         {% for user in user.followed %}
            <header style="background:none;color:#000;">
           <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
@@ -503,14 +521,6 @@ section .btn {
             </div>
       </header>
         {% endfor %}
-        {% else %}
-          <header style="background:none;color:#000;">
-          <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail" style="width:30px;height:30px;">
-          <div class="profile-name">
-            <a href="{{ url_for('follow', username=user.username) }}" style="text-decoration:none;color:#00376b;font-weight:500;">sign in to view who {{user.username.title()}} follows</a>
-          </div>
-      </header>
-        {% endif %}
       </div>
     </div>
   </div>
