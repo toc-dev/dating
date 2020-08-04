@@ -52,6 +52,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+[![Cover][cover]](https://neudating.herokuapp.com/home)
 Welcome to the official Bambi Dating Repository. On this version of Bambi, the user can do the following:
 ## Match with users
 [![Matches][matches]](https://neudating.herokuapp.com/home)
@@ -176,6 +177,7 @@ Project Link: [Bambi Dating Official Webapp](https://neudating.herokuapp.com)
 [license-url]: https://github.com/harunmohamed/dating/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/harunmohamed
+[cover]: https://i.imgur.com/BObshhQ.jpg
 [matches]: https://i.imgur.com/vB42ikW.png
 [likes]: https://i.imgur.com/hsNJqc7.png
 [messages]: https://i.imgur.com/WGHaz9x.png
