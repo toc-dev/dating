@@ -3,10 +3,10 @@ from datetime import datetime
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
-from bambiv3 import app, db, bcrypt, mail
-from bambiv3.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm, RequestResetForm, ResetPasswordForm
-from bambiv3.models import User, Message as m
-from bambiv3.functions import profile_img
+from dating import app, db, bcrypt, mail
+from dating.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm, RequestResetForm, ResetPasswordForm
+from dating.models import User, Message as m
+from dating.functions import profile_img
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 

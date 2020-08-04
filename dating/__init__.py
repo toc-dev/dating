@@ -34,4 +34,4 @@ mail = Mail(app)
 
 
 
-from bambiv3 import routes, models
+from dating import routes, models

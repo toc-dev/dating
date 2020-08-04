@@ -1,6 +1,6 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from bambiv3 import db, login_manager, app
+from dating import db, login_manager, app
 from flask_login import UserMixin
 from markdown import markdown
 import bleach

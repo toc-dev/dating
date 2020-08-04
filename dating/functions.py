@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 import secrets
 from PIL import Image
-from bambiv3 import app
+from dating import app
 
 # profile image resizing and optimization
 def profile_img(form_picture):

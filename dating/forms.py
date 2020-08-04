@@ -4,7 +4,7 @@ from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, RadioField, DateField
 from flask_pagedown.fields import PageDownField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
-from bambiv3.models import User
+from dating.models import User
 
 class RegistrationForm(FlaskForm):
 	username = StringField('Username', validators = [DataRequired(), Length(min=2, max=20), Regexp(r'^[\w.-_.]+$', message='No Spaces. Use "-" or "_" or "." instead')]) 
