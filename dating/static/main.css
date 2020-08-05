@@ -143,3 +143,24 @@ header{
 ::-webkit-scrollbar-thumb:hover {
   background: #F9E9C8; 
 }
+
+.bottom {
+  overflow: hidden;
+  background-color: #070707;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  }
+
+.bottom a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+  width:25%;
+  height: 45px;
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
