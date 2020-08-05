@@ -55,7 +55,7 @@
           {{ likes.append(user.username) }}
         {% endfor %}
       </span>
-     <h2>
+     <h2 class="mt-1">
       See who likes you
       <span id="message_count" class="badge badge-warning" style="visibility: {% if likes | length > 0 %}
       visible {% else %} hidden {% endif %};">{{ likes | length }} </span>

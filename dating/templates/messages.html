@@ -58,7 +58,7 @@
     <div class="col-lg-6 offset-lg-3">
      
       {% if current_user.is_authenticated %}
-          <h5 class="d-block d-lg-none">My Matches</h5>
+          <h2 class="d-block d-lg-none mt-1">My Matches</h2>
           <section class="cardi scroll mb-2">
             {% for user in users if user != current_user and user.is_following(current_user) and current_user.is_following(user) %}
             <div class="others">
@@ -114,7 +114,7 @@
     </div>
   {% endfor %}
   <div class="recent d-block d-lg-none">
-    <h5>Recent Chats</h5>
+    <h2>Recent Chats</h2>
         {% for person in recent_chats %}
         <a href="{{url_for('message', recipient=person.username)}}" style="text-decoration:none;">
         <header class="mb-2">
