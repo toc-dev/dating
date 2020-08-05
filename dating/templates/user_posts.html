@@ -253,7 +253,7 @@ section .btn {
               <div class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton" style="cursor:pointer;padding:0;background:#191917;color:#fff;margin-left:-80px;">
                 {% if current_user == user%}
                 {% set new_messages = current_user.new_messages() %}
-                <a class="dropdown-item" href="{{ url_for('message', recipient=current_user.username) }}" style="border-top:none;">🔐 Messages <span id="message_count" class="badge badge-warning" style="display:{% if new_messages %}inline{% else %}none{% endif %};">{{ new_messages }}</span></a>
+                <a class="dropdown-item" href="{{ url_for('messages') }}" style="border-top:none;">🔐 Messages <span id="message_count" class="badge badge-warning" style="display:{% if new_messages %}inline{% else %}none{% endif %};">{{ new_messages }}</span></a>
                 <a class="dropdown-item" data-toggle="modal" data-target="#info">⚜ Edit Profile</a>
                 {% else %}
                   {% if not current_user.is_following(user) %}
