@@ -127,11 +127,6 @@ ul.nav li:last-child a {
       
       <a href="{{url_for('messages')}}" {% if '/messages' == request.path %}  class="active" {% endif %}>
         <img src="https://image.flaticon.com/icons/svg/893/893257.svg" style="width:30px;height:30px;">
-        {% if current_user.is_authenticated %}
-          {% set new_messages = current_user.new_messages() %}
-          <span id="message_count" class="badge badge-warning"style="visibility: 
-          {% if new_messages %}visible{% else %}hidden {% endif %};">{{ new_messages }}</span>
-        {% endif %}
       </a>
 
       <a href="{{url_for('user_posts', username=current_user.username)}}">
