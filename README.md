@@ -177,8 +177,8 @@ Project Link: [Bambi Dating Official Webapp](https://neudating.herokuapp.com)
 [license-url]: https://github.com/harunmohamed/dating/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/harunmohamed
-[cover]: https://i.imgur.com/BObshhQ.jpg
+[cover]: https://i.imgur.com/mqOUsPA.jpg
 [matches]: https://i.imgur.com/vB42ikW.png
-[likes]: https://i.imgur.com/hsNJqc7.png
+[likes]: https://i.imgur.com/CLSabOU.jpg
 [messages]: https://i.imgur.com/WGHaz9x.png
 [profile]: https://i.imgur.com/zGcXGT6.jpg
