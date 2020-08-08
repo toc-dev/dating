@@ -51,7 +51,7 @@
      
      <span class="d-none">
        {% set likes = [] %}
-        {% for user in users if user.is_following(current_user) and not current_user.is_following(user) %}
+        {% for user in liked_people %}
           {{ likes.append(user.username) }}
         {% endfor %}
       </span>
@@ -61,7 +61,7 @@
       visible {% else %} hidden {% endif %};">{{ likes | length }} </span>
      </h2>
      <div class="card-columns">
-      {% for user in users if user != current_user and not current_user.is_following(user) and user.is_following(current_user) and user.gender != current_user.gender %}
+      {% for user in liked_people %}
       {% if user %}
       <div class="card" style="border:1px solid #191917;border-radius:5px;">
         <a href="{{ url_for('user_posts',username=user.username) }}" style="text-decoration:none;">
@@ -75,7 +75,8 @@
         {% endif %}
 
         <div class="card-block p-2" style="background:#191917;">
-          
+          <span style="text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:1.5px;color:#FE3C72;">{{ year - user.age.year }} • {{ user.gender }}</span> <br>
+
           {% if user.bio %}<code style="color:#fff;"> {{user.bio}} </code> <br> {% endif %}
 
           {% if user.country %} <small>🌍 From {{user.country}}</small> {% endif %}

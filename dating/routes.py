@@ -22,10 +22,17 @@ def before_request():
 @app.route('/home', methods=['GET', 'POST'])
 def home():
 	if current_user.is_authenticated:
-		hour = datetime.now().hour
-		greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
 		users = User.query.all()
-		return render_template('swipe.html', title="Home", greeting=greeting, users=users)
+
+		match_with = set()
+		for user in users:
+			if not current_user.is_following(user) and current_user.gender != user.gender:
+				match_with.add(user)
+
+		hour = datetime.now().hour
+		year = datetime.now().year
+		greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
+		return render_template('swipe.html', title="Home", match_with=match_with, greeting=greeting, year=year, users=users)
 	else:
 		return render_template('intro.html', title="Intro")
 
@@ -88,9 +95,14 @@ def message(recipient):
 @login_required
 def discover():
 	users = User.query.all()
+	liked_people = set()
+	for user in users:
+		if user != current_user and not current_user.is_following(user) and user.is_following(current_user) and user.gender != current_user.gender:
+			liked_people.add(user)
 	hour = datetime.now().hour
+	year = datetime.now().year
 	greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
-	return render_template('discover.html', users=users, greeting=greeting, title='Discover')
+	return render_template('discover.html', users=users, liked_people=liked_people, greeting=greeting, year=year, title='Discover')
 
 
 @app.route('/register', methods=['GET', 'POST'])
