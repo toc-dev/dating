@@ -41,7 +41,8 @@
             {% endfor %}
             </span>
             <small title="{{top_message[0]}}">
-              {{ top_message[0] | truncate(40) }}
+              {{ top_message[0] | truncate(40) }} <br>
+              <small class="text-muted">active {{ moment(person.last_seen).fromNow() }}</small>
             </small>
         </div>
       </header>
@@ -128,7 +129,8 @@
             {% endfor %}
             </span>
             <small>
-              {{ top_message[0] | truncate(50) }}
+              {{ top_message[0] | truncate(50) }} <br>
+              <small class="text-muted">active {{ moment(person.last_seen).fromNow() }}</small>
             </small>
         </div>
       </header>
