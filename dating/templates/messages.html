@@ -40,10 +40,8 @@
               {{ top_message.append(message.body) }}
             {% endfor %}
             </span>
-            <small title="{{top_message[0]}}">
-              {{ top_message[0] | truncate(40) }} <br>
-              <small class="text-muted">active {{ moment(person.last_seen).fromNow() }}</small>
-            </small>
+            <small title="{{top_message[0]}}">{{ top_message[0] | truncate(40) }}</small>
+            <small class="text-muted" style="font-size:70%;">active {{ moment(person.last_seen).fromNow() }}</small>
         </div>
       </header>
       </a>
@@ -109,7 +107,7 @@
 
         <footer>
             <div class="Retweets">
-               <small class="date text-muted">{{ moment(message.timestamp).fromNow() }}</small>
+               <small class="date text-muted" style="font-size:70%;">sent {{ moment(message.timestamp).fromNow() }}</small>
             </div>
         </footer>
     </div>
@@ -128,10 +126,8 @@
               {{ top_message.append(message.body) }}
             {% endfor %}
             </span>
-            <small>
-              {{ top_message[0] | truncate(50) }} <br>
-              <small class="text-muted">active {{ moment(person.last_seen).fromNow() }}</small>
-            </small>
+            <small title="{{top_message[0]}}">{{ top_message[0] | truncate(40) }}</small>
+            <small class="text-muted" style="font-size:70%;">active {{ moment(person.last_seen).fromNow() }}</small>
         </div>
       </header>
       </a>

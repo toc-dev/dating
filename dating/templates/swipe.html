@@ -75,9 +75,15 @@
 
           {% if user.country %} <small>🌍 From {{user.country}}</small> {% endif %}
           <small class="pl-3">😎 studies {{user.department}}</small>
-          
+          <br>
+          {% if user.instagram != "instagram"  %}
+          <a href="https://www.instagram.com/{{user.instagram}}"><img src="{{ url_for('static', filename='resources/' + 'instagram.svg') }}" style="width:40px;height:40px;"></a>
+          {% endif %}
+          {% if user.snapchat != "snapchat"  %} 
+          <a href="https://www.snapchat.com/add/{{user.snapchat}}"><img src="{{ url_for('static', filename='resources/' + 'snapchat.svg') }}" style="width:35px;height:35px;"></a>
+          {% endif %}
 
-          <div style="display:flex;" class="mt-2">
+          <div style="display:flex;">
             <p><a class="btn btn-sm btn-primary mt-2 ml-1 px-4" href="{{ url_for('follow', username=user.username) }}">follow</a></p>
           </div><!--seller div-->
 

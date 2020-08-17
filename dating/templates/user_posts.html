@@ -317,6 +317,7 @@ section .btn {
 
   <div class="row">
     <div class="col-lg-3">
+
     <div class="card about mb-2" style="color:#fff;background:#191917;border-radius:10px;">
     <div class="card-body">
       <p> 🏅 Majors in <span>{{user.department}}</span></p>
@@ -336,11 +337,16 @@ section .btn {
       <p> 🌍 From <a href="https://www.google.com/maps?q={{user.country.title()}}" target="_blank">
       {{user.country.title()}}</a></p>
       {% endif %}
-      <!--<p> 🚖 Lives in <span>Nicosia, Cyprus</span></p>-->
       <p> 💪 Joined <span>{{ moment(user.date_joined).fromNow() }}</span></p>
       {% if current_user.is_authenticated and current_user.is_following(user) %}
       <p class="f">💛 You follow {{user.username.title()}}</p> 
       <p>⏰ Last seen on: <span>{{ moment(user.last_seen).format('LLL') }}</span></p>
+      {% endif %}
+      {% if user.instagram != "instagram"  %}
+        <a href="https://www.instagram.com/{{user.instagram}}"><img src="{{ url_for('static', filename='resources/' + 'instagram.svg') }}" style="width:40px;height:40px;"></a>
+      {% endif %}
+      {% if user.snapchat != "snapchat"  %} 
+        <a href="https://www.snapchat.com/add/{{user.snapchat}}"><img src="{{ url_for('static', filename='resources/' + 'snapchat.svg') }}" style="width:35px;height:35px;"></a>
       {% endif %}
     </div>
   </div>
