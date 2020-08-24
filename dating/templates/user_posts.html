@@ -549,7 +549,7 @@ section .btn {
           <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <span class="form-control-label">Profile Images</span>
+                <p class="form-control-label" >Profile Images</p>
                 <div class="form-group mt-2">
                   {{ form.picture(class="form-control-file") }}
                   {% if form.picture.errors %}
