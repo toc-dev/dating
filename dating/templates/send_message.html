@@ -36,7 +36,9 @@
 
     <div class="col-lg-7 offset-lg-3"> 
       
-      <h3 style="text-align:center"><a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{user.username.title()}}
+      <h3 style="text-align:center;margin-left:-50px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" style="width:40px;height:40px;border-radius:50%;">
+        <a href="{{url_for('user_posts', username=recipient)}}" style="color:#fff;">{{user.username.title()}}
              {% if recipient in ["harun" , "bambi"] %}
              <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:17px;height:17px;margin-left: -5px;">
              {% endif %}

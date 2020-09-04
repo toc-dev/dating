@@ -96,7 +96,7 @@
         </div>
         
         <div class="card-block p-2" style="background:#191917;">
-          <h2 class="card_title">Bambi <img src="https://image.flaticon.com/icons/svg/1271/1271380.svg" style="width:20px;height:20px;margin-top: -5px;" title="Verified"></h2>
+          <h2 class="card_title">Bambi <img src="{{ url_for('static', filename='resources/' + 'verified.svg') }}" style="width:20px;height:20px;margin-top: -5px;" title="Verified"></h2>
           <code style="color:#fff;"> Looks like you are out of people to match with </code> <br>
 
           <small><a href="{{url_for('discover')}}">🔆 See who likes you</a></small>
