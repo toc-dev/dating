@@ -363,13 +363,13 @@ section .btn {
 
     <div class="col-lg-6">
      
-      <div class="row mt-3">
-        <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="default profile" class="profile-thumbnail" style="width:33%;max-height:400px;">
-        <img src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="default profile" class="profile-thumbnail" style="width:33%;max-height:400px;">
-        <img src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="default profile" class="profile-thumbnail" style="width:33%;max-height:400px;">
+      <div class="row mt-3 ml-1 mr-1">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp) }}" alt="dp" class="profile-thumbnail" style="width:34%;max-height:400px;margin-right:1%;border-radius:8px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp2) }}" alt="dp2" class="profile-thumbnail" style="width:32%;max-height:400px;margin-right:1%;border-radius:8px;">
+        <img src="{{ url_for('static', filename='profile_pics/' + user.dp3) }}" alt="dp3" class="profile-thumbnail" style="width:32%;max-height:400px;border-radius:8px;">
       </div>
 
-      <div class="mt-3 mb-2 d-block d-lg-none" style="background:#191917;padding:8px 8px 8px 32px;font-size:20px;display:block;border-radius:5px;">
+      <div class="mt-3 mb-4 d-block d-lg-none" style="background:#191917;padding:8px 8px 8px 32px;font-size:20px;display:block;border-radius:5px;">
         <a href="{{ url_for('logout') }}" style="text-decoration:none;color:#818181;"> 🛫 Logout</a>
         </div>
 
