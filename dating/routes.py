@@ -36,6 +36,21 @@ def home():
 	else:
 		return render_template('intro.html', title="Intro")
 
+
+@app.route('/discover')
+@login_required
+def discover():
+	users = User.query.all()
+	liked_people = set()
+	for user in users:
+		if user != current_user and not current_user.is_following(user) and user.is_following(current_user) and user.gender != current_user.gender:
+			liked_people.add(user)
+	hour = datetime.now().hour
+	year = datetime.now().year
+	greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
+	return render_template('discover.html', users=users, liked_people=liked_people, greeting=greeting, year=year, title='Discover')
+
+
 @app.route('/messages')
 @login_required
 def messages():
@@ -91,18 +106,6 @@ def message(recipient):
 
 	return render_template('send_message.html', recipient=recipient, title="Chat with " + recipient.title() , user=user, form=form, messages=messages, recent_chats=recent_chats)
 
-@app.route('/discover')
-@login_required
-def discover():
-	users = User.query.all()
-	liked_people = set()
-	for user in users:
-		if user != current_user and not current_user.is_following(user) and user.is_following(current_user) and user.gender != current_user.gender:
-			liked_people.add(user)
-	hour = datetime.now().hour
-	year = datetime.now().year
-	greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
-	return render_template('discover.html', users=users, liked_people=liked_people, greeting=greeting, year=year, title='Discover')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -183,6 +186,7 @@ def account():
 	return render_template('account.html', title='Account', dp=dp, form=form)
 
 @app.route("/<string:username>", methods=['GET', 'POST'])
+@login_required
 def user_posts(username):
 	username = username.lower()
 	if current_user.is_authenticated:
