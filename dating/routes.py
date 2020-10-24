@@ -32,7 +32,7 @@ def home():
 		hour = datetime.now().hour
 		year = datetime.now().year
 		greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
-		return render_template('swipe.html', title="Home", match_with=match_with, greeting=greeting, year=year, users=users)
+		return render_template('swipe.html', title="Match with friends", match_with=match_with, greeting=greeting, year=year, users=users)
 	else:
 		return render_template('intro.html', title="Intro")
 
@@ -48,7 +48,7 @@ def discover():
 	hour = datetime.now().hour
 	year = datetime.now().year
 	greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
-	return render_template('discover.html', users=users, liked_people=liked_people, greeting=greeting, year=year, title='Discover')
+	return render_template('discover.html', users=users, liked_people=liked_people, greeting=greeting, year=year, title='See who likes you')
 
 
 @app.route('/messages')
@@ -70,7 +70,7 @@ def messages():
 	users = User.query.all()
 	hour = datetime.now().hour
 	greeting = "Good morning" if 5<=hour<12 else "Good afternoon" if hour<18 else "Good evening"
-	return render_template('messages.html', users=users, greeting=greeting, recent_chats=recent_chats, messages_sent=messages_sent, messages_received=messages_received)
+	return render_template('messages.html', title="Messages", users=users, greeting=greeting, recent_chats=recent_chats, messages_sent=messages_sent, messages_received=messages_received)
 
 @app.route('/m/<recipient>', methods=['GET', 'POST'])
 @login_required
