@@ -287,7 +287,7 @@ section .btn {
             <!--<code>{% if user.email %} {{user.email.split("@")[0] | lower}} {% endif %} - </code>-->
             <code>{{user.username}} - </code>
             {% if user.bio %}
-            <code style="color:#fff;">{{user.bio | safe}}</code>
+            <code style="color:#fff;">{{user.bio}}</code> <!-- removed | safe -->
             {% else %}
             <code style="color:#fff;">hey there, lets be friends 🤗</code>
             {%endif%}

@@ -60,8 +60,8 @@
           <img src="{{ url_for('static', filename='profile_pics/' + message.author.dp) }}" alt="profile pic" title="{{message.author.username.lower()}}" style="width:30px;height:30px;border-radius:50%">
           {% endif %} 
 
-          {{message.body | safe | urlize(40, target='_blank')}} 
-
+          {{message.body | urlize(40, target='_blank')}} 
+          <!--{{message.body | safe | urlize(40, target='_blank')}}-->
           <br>
           <small style="display:inline-block;float:right;">{{ moment(message.timestamp).fromNow() }}</small>
         </p>
